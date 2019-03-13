@@ -1,37 +1,62 @@
-## Welcome to GitHub Pages
+﻿# 얼굴 코디
 
-You can use the [editor on GitHub](https://github.com/kookmin-sw/cap-template/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## 1. 프로잭트 소개
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+본 프로젝트는 이미지 합성을 통해 원하는 표정으로 보정할 수 있는 프로그램 개발을 목표로 한다.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 2. 소개 영상
 
-```markdown
-Syntax highlighted code block
+준비중
 
-# Header 1
-## Header 2
-### Header 3
+## 3. 팀 소개
 
-- Bulleted
-- List
+### Professor
 
-1. Numbered
-2. List
+- 김준호 교수님
 
-**Bold** and _Italic_ and `Code` text
+### 팀원
 
-[Link](url) and ![Image](src)
-```
+- 조승현
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+````
+* 학번 :
+*e-mail :
+````
+- 이진구
 
-### Jekyll Themes
+````
+* 학번 :
+*e-mail :
+````
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kookmin-sw/cap-template/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- 김상열
 
-### Support or Contact
+````
+* 학번 :
+*e-mail :
+````
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- 김가연
+
+````
+* 학번 :
+*e-mail :
+````
+
+- 이대현
+
+````
+* 학번 :
+*e-mail :
+````
+
+- 강남삼
+
+````
+* 학번 :
+*e-mail :
+````
+
+## 4. Abstract
+
