@@ -1,7 +1,6 @@
 ﻿# 얼굴 코디
 Face Landmark를 이용한 얼굴 표정 합성
 
-![logo](./doc/img/logo.jpg)
 
 ## 1. 프로잭트 소개
 
@@ -12,7 +11,7 @@ Face Landmark를 이용한 얼굴 표정 합성
 ## 2. Abstract
 
 This project aims to develop a program that can correct the desired expression through image synthesis.
-By using completed program, anyone can get the corrected picture with the desired expression through selecting the picture you want to modify and the simple task of shooting according to the guide.
+By using completed program, anyone can get the edited picture with the desired expression through selecting the picture you want to modify and the simple task of shooting according to the guide.
 
 ## 3. 소개 영상
 
@@ -75,8 +74,8 @@ By using completed program, anyone can get the corrected picture with the desire
 ![GNS](./doc/img/gns.jpg)
 
 ````
-* 학번 : 00000000
-* e-mail :
+* 학번 : 20153668
+* e-mail : 189745297@qq.com
 ````
 
 ## 5. 사용법
