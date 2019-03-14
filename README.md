@@ -1,68 +1,84 @@
-# Welcome to GitHub
+﻿# 얼굴 코디
+Face Landmark를 이용한 얼굴 표정 합성
 
-캡스톤 팀 생성을 축하합니다.
+## 1. 프로잭트 소개
 
-## 팀소개 및 페이지를 꾸며주세요.
-
-- readme.md 수정.
-
-- index.md 예시보고 수정.
-
-- 수정후 팀페이지 확인하여 점검.
-
-**팀페이지 주소** -> https://kookmin-sw.github.io/ `{{자신의 리파지토리 아이디}}`
-
-**예시)** 1조  https://kookmin-sw.github.io/2018-cap-1
-
-## readme파일에 아래와 같은 내용들을 추가하세요.
-
-### 1. 프로잭트 소개
-
-프로젝트
-
-### 2. 소개 영상
-
-프로젝트 소개하는 영상을 추가하세요
-
-### 3. 팀 소개
-
-팀을 소개하세요.
-
-팀원정보 및 담당이나 사진 및 SNS를 이용하여 소개하세요.
-
-### 4. 사용법
-
-소스코드제출시 설치법이나 사용법을 작성하세요.
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
+본 프로젝트는 이미지 합성을 통해 원하는 표정으로 보정할 수 있는 프로그램 개발을 목표로 한다.
+소스이미지 타겟이미지 2장을 입력받아 소스이미지에서의 얼굴 표정을 타겟이미지의 선택할 얼굴에 합성시킨다.
 
 
-## Markdown을 사용하여 내용꾸미기
+## 2. Abstract
 
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
+This project.....
 
-```markdown
-Syntax highlighted code block
+## 3. 소개 영상
 
-# Header 1
-## Header 2
-### Header 3
+준비중
 
-- Bulleted
-- List
+## 4. 팀 소개
 
-1. Numbered
-2. List
+### Professor
 
-**Bold** and _Italic_ and `Code` text
+- 김준호 교수님
 
-[Link](url) and ![Image](src)
-```
+### 팀원
 
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- 조승현
 
-### Support or Contact
+사진
 
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
+````
+* 학번 :
+* e-mail :
+````
+- 이진구
+
+[!LJG](./doc/img/ljg.jpg)
+
+````
+* 학번 :
+* e-mail :
+````
+
+- 김상열
+
+[!KSY](./doc/img/ksy.jpg)
+
+````
+* 학번 :
+* e-mail :
+````
+
+- 김가연
+
+[!KGY](./doc/img/kgy.jpg)
+
+````
+* 학번 :
+* e-mail :
+````
+
+- 이대현
+
+[!LDH](./doc/img/ldh.jpg)
+
+````
+* 학번 : 20143085
+* e-mail : dhlee130@naver.com
+````
+
+- 강남삼
+
+[!GNS](./doc/img/gns.jpg)
+
+````
+* 학번 :
+* e-mail :
+````
+
+## 5. 사용법
+
+추후 추가예정
+
+
+
