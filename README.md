@@ -33,7 +33,7 @@ This project.....
 ````
 - 이진구
 
-[!LJG](./doc/img/ljg.jpg)
+![LJG](./doc/img/ljg.jpg)
 
 ````
 * 학번 :
@@ -42,7 +42,7 @@ This project.....
 
 - 김상열
 
-[!KSY](./doc/img/ksy.jpg)
+![KSY](./doc/img/ksy.jpg)
 
 ````
 * 학번 :
@@ -51,7 +51,7 @@ This project.....
 
 - 김가연
 
-[!KGY](./doc/img/kgy.jpg)
+![KGY](./doc/img/kgy.jpg)
 
 ````
 * 학번 :
@@ -60,7 +60,7 @@ This project.....
 
 - 이대현
 
-[!LDH](./doc/img/ldh.jpg)
+![LDH](./doc/img/ldh.jpg)
 
 ````
 * 학번 : 20143085
@@ -69,7 +69,7 @@ This project.....
 
 - 강남삼
 
-[!GNS](./doc/img/gns.jpg)
+![GNS](./doc/img/gns.jpg)
 
 ````
 * 학번 :
