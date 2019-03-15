@@ -15,7 +15,7 @@ By using our completed program, you can select the pircure you want to modify an
 
 ## 3. 소개 영상
 
-[![thumbnail](./doc/img/thumbnail.jpg)](https://youtu.be/N6R1Fz4J0ts)
+[![thumbnail](./doc/img/thumbnail.jpg)](https://youtu.be/NZtXfdSoL8w)
 
 ## 4. 팀 소개
 
