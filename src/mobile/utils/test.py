@@ -1,6 +1,7 @@
 import os
 from config import *
 from face_detection import *
+from light_reduction import *
 
 if __name__ == '__main__':
 	trg_name, trg_exts = os.path.splitext(os.path.basename(TARGET_IMG))

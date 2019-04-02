@@ -1,4 +1,4 @@
-WORKING_PATH = "C:/Users/Ten/Documents/2019-cap1-2019_2/src/mobile"
+WORKING_PATH = "/Users/csh/Documents/Github/2019-cap1-2019_2/src/mobile/"
 
 TARGET_IMG = WORKING_PATH + '/images/sample/hj1.png'
 SOURCE_IMG = WORKING_PATH + '/images/sample/hj2.png'
