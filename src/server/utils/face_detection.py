@@ -59,7 +59,7 @@ def detect_faces(file_name, file_exts):
 
 	return len(face_rects)
 
-# extract and save face area in photo.
+# extract and save face area in photo using landmarks.
 def extract_faces(file_name, file_exts):
 	num_faces = detect_faces(file_name, file_exts)
 
