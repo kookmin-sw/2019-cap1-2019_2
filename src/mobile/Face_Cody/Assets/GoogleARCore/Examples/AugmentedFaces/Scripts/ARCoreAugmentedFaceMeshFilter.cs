@@ -23,6 +23,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
     using System.Collections.Generic;
     using GoogleARCore;
     using UnityEngine;
+    using System.IO;
 
     /// <summary>
     /// Helper component to update face mesh data.
@@ -45,6 +46,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
         private List<int> m_MeshIndices = new List<int>();
         private Mesh m_Mesh = null;
         private bool m_MeshInitialized = false;
+        string path;
 
         /// <summary>
         /// Gets or sets the ARCore AugmentedFace object that will be used to update the face mesh data.
@@ -71,6 +73,12 @@ namespace GoogleARCore.Examples.AugmentedFaces
             m_Mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = m_Mesh;
             m_AugmentedFaceList = new List<AugmentedFace>();
+            path = Application.persistentDataPath + "/My_Log/";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
         /// <summary>
@@ -124,6 +132,43 @@ namespace GoogleARCore.Examples.AugmentedFaces
             m_Mesh.SetUVs(0, m_MeshUVs);
 
             m_Mesh.RecalculateBounds();
+        }
+
+        public void SaveMeshInfo()
+        {
+            string name = path + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            sw.WriteLine("Vertices\t" + m_Mesh.vertices.Length);
+            for (int i = 0; i < m_Mesh.vertices.Length; i++)
+            {
+                sw.WriteLine("{0}, {1}, {2}", m_Mesh.vertices[i].x, m_Mesh.vertices[i].y, m_Mesh.vertices[i].z);
+            }
+            sw.WriteLine("\n");
+
+            sw.WriteLine("Normals\t" + m_Mesh.normals.Length);
+            for (int i = 0; i < m_Mesh.normals.Length; i++)
+            {
+                sw.WriteLine("{0}, {1}, {2}", m_Mesh.normals[i].x, m_Mesh.normals[i].y, m_Mesh.normals[i].z);
+            }
+            sw.WriteLine("\n");
+
+            sw.WriteLine("UVs\t" + m_Mesh.uv.Length);
+            for (int i = 0; i < m_Mesh.uv.Length; i++)
+            {
+                sw.WriteLine("{0}, {1}", m_Mesh.uv[i].x, m_Mesh.uv[i].y);
+            }
+            sw.WriteLine("\n");
+
+            sw.WriteLine("triangles\t" + m_Mesh.triangles.Length);
+            for (int i = 0; i < m_Mesh.triangles.Length; i++)
+            {
+                sw.WriteLine(m_Mesh.triangles[i]);
+            }
+
+            sw.Close();
+            fs.Close();
         }
     }
 }
