@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 
 def LoadData():
-	subscription_key = 'be36e0125fac4abc9d5e6857d4f1c93d'
+	subscription_key = 'subscription_key'
 	assert subscription_key
 
 	face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
