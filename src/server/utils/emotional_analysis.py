@@ -59,3 +59,7 @@ def EmotionalAnalysis():
 	    emotion_df[i] = prob
 	    
 	print(emotion_df)
+
+if __name__ == '__main__':
+
+	EmotionalAnalysis()
