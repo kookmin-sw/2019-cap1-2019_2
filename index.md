@@ -1,6 +1,6 @@
 ﻿# 얼굴 코디
 ARCore를 활용한 자동 합성 시스템
-![logo](./doc/img/logo.tif)
+![logo](./doc/img/logo.jpg)
 
 ## 1. 프로젝트 소개
 
