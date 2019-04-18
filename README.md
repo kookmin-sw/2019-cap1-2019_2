@@ -1,7 +1,7 @@
 ﻿# 얼굴 코디
 ARCore를 활용한 자동 합성 시스템
 <br/><br/>
-<img align="left" src="./doc/img/logo.jpg" alt="logo" width="300" height="177">
+<img src="./doc/img/logo.jpg" alt="logo" width="300" height="177">
 <br/>
 ## 1. 프로젝트 소개
 
