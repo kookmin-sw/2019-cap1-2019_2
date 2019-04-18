@@ -2,7 +2,7 @@
 ARCore를 활용한 자동 합성 시스템
 <br/><br/>
 <img align="left" src="./doc/img/logo.jpg" alt="logo" width="300" height="177">
-
+<br/>
 ## 1. 프로젝트 소개
 
 본 프로젝트는 사람의 얼굴 방향, 표정을 기반으로 얼굴을 합성하여 모두가 잘 나온 단체 사진을 얻는 것을 목표로 한다.
