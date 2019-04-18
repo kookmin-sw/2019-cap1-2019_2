@@ -7,13 +7,13 @@ ARCore를 활용한 자동 합성 시스템
 
 본 프로젝트는 사람의 얼굴 방향, 표정을 기반으로 얼굴을 합성하여 모두가 잘 나온 단체 사진을 얻는 것을 목표로 한다.
 수정할 사진 2장을 선택하는 과정을 자동화하여 사용자의 서비스 이용에 편리함을 제공한다. 
-사용자는 타 프로그램과 비교하면 3초간의 동영상을 찍는 비교적 간단한 시나리오로 최종 합성 사진을 얻을 수 있다.
+사용자는 3초간의 동영상을 찍는 비교적 간단한 시나리오로 최종 합성 사진을 얻을 수 있다.
 
 ## 2. Abstract
 
-This project aims to obtain a group photo that everyone well received by synthesizing faces based on face direction and face expression of a person.
+This project aims to obtain a group photo that everyone looks good by synthesizing faces based on face direction and face expression of a person.
 It automates the process of selecting two photos to be modified, thereby providing convenience for users to use the service.
-Compared to other programs, users can obtain final edited photos in a relatively simple scenario of taking a three-second video.
+Users can obtain final edited photos in a relatively simple scenario of taking a three-second video.
 
 ## 3. 시나리오
 
