@@ -105,8 +105,6 @@ def correct_colours(img1, img2, lms1):
 	img1_blur = cv2.GaussianBlur(img1, (blur_amount, blur_amount), 0)
 	img2_blur = cv2.GaussianBlur(img2, (blur_amount, blur_amount), 0)
 	img2_blur += (128 * (img2_blur <= 1.0).astype(img2_blur.dtype))
-	cv2.imshow('img2_blur',img2_blur)
-	cv2.waitKey(0)
 	return (img2.astype(np.float64) * img1_blur.astype(np.float64) / img2_blur.astype(np.float64))
 
 # use opencv seamless clone to make color correction and save result
@@ -128,11 +126,12 @@ def find_color(lms_1,lms_2,img):
 	return img[int(find_color_point.item(0,0))][int(find_color_point.item(0,1))]
 
 
-
-
-
-
-
+def inpaint(TARGETIMAGE_PATH,MASKIMAGE_PATH):
+	trg = cv2.imread(TARGETIMAGE_PATH)
+	mask = cv2.imread(MASKIMAGE_PATH)
+	mask = cv2.cvtColor(mask,cv2.COLOR_BGR2GRAY)
+	dst = cv2.inpaint(trg, mask, 3, cv2.INPAINT_TELEA)
+	cv2.imwrite(DELETEMOUTHIMAGE_PATH,dst)
 
 
 def mouth_swap(trgimg_path, srcimg_path):
@@ -164,7 +163,6 @@ def mouth_swap(trgimg_path, srcimg_path):
 	cv2.imwrite(TRANSFORMIAMGE_PATH,warped_src)
 	cv2.imwrite(DELETEMOUTHIMAGE_PATH,output)
 
-	seamlessCloning("./image/inpaint.jpg",TRANSFORMIAMGE_PATH,lms_trg[MOUTH_POINTS], mouth_center)
-
-
+	seamlessCloning(DELETEMOUTHIMAGE_PATH,TRANSFORMIAMGE_PATH,lms_trg[MOUTH_POINTS], mouth_center)
+	
 
