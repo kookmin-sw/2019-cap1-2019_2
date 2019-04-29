@@ -46,7 +46,8 @@ namespace GoogleARCore.Examples.AugmentedFaces
         private List<int> m_MeshIndices = new List<int>();
         private Mesh m_Mesh = null;
         private bool m_MeshInitialized = false;
-        string path;
+        private Camera camera;
+        private string path;
 
         /// <summary>
         /// Gets or sets the ARCore AugmentedFace object that will be used to update the face mesh data.
@@ -73,11 +74,16 @@ namespace GoogleARCore.Examples.AugmentedFaces
             m_Mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = m_Mesh;
             m_AugmentedFaceList = new List<AugmentedFace>();
+            camera = GameObject.Find("First Person Camera").GetComponent<Camera>();
             path = Application.persistentDataPath + "/My_Log/";
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(path + "mesh/"))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path + "mesh/");
+            }
+            if (!Directory.Exists(path + "texture/"))
+            {
+                Directory.CreateDirectory(path + "texture/");
             }
         }
 
@@ -135,40 +141,124 @@ namespace GoogleARCore.Examples.AugmentedFaces
         }
 
         public void SaveMeshInfo()
+        {         
+            SaveMeshVertices();
+            SaveMeshUVs();
+            SaveMeshTriangles();
+        }
+
+        public void SaveMeshVertices()
         {
-            string name = path + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
+            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_vertices.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
-            sw.WriteLine("Vertices\t" + m_Mesh.vertices.Length);
-            for (int i = 0; i < m_Mesh.vertices.Length; i++)
-            {
-                sw.WriteLine("{0}, {1}, {2}", m_Mesh.vertices[i].x, m_Mesh.vertices[i].y, m_Mesh.vertices[i].z);
-            }
-            sw.WriteLine("\n");
 
-            sw.WriteLine("Normals\t" + m_Mesh.normals.Length);
-            for (int i = 0; i < m_Mesh.normals.Length; i++)
+            foreach (Vector3 vertex in m_Mesh.vertices)
             {
-                sw.WriteLine("{0}, {1}, {2}", m_Mesh.normals[i].x, m_Mesh.normals[i].y, m_Mesh.normals[i].z);
-            }
-            sw.WriteLine("\n");
-
-            sw.WriteLine("UVs\t" + m_Mesh.uv.Length);
-            for (int i = 0; i < m_Mesh.uv.Length; i++)
-            {
-                sw.WriteLine("{0}, {1}", m_Mesh.uv[i].x, m_Mesh.uv[i].y);
-            }
-            sw.WriteLine("\n");
-
-            sw.WriteLine("triangles\t" + m_Mesh.triangles.Length);
-            for (int i = 0; i < m_Mesh.triangles.Length; i++)
-            {
-                sw.WriteLine(m_Mesh.triangles[i]);
+                sw.WriteLine("{0} {1} {2}", vertex.x, vertex.y, vertex.z);
             }
 
             sw.Close();
             fs.Close();
         }
+
+        public void SaveMeshUVs()
+        {
+            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_uvs.txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+
+            foreach (Vector2 uv in m_Mesh.uv)
+            {
+                sw.WriteLine("{0} {1}", uv.x, uv.y);
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
+        public void SaveMeshTriangles()
+        {
+            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_triangles.txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+
+            foreach (int index in m_Mesh.triangles)
+            {
+                sw.WriteLine(index);
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
+
+        public void SaveTextureInfo()
+        {
+            SaveTextureVertices();
+            SaveTextureUVs();
+            SaveTextureTriangles();
+        }
+
+        public void SaveTextureVertices()
+        {
+            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_vertices.txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            foreach (Vector3 vertex in m_Mesh.vertices)
+            {
+                Vector2 coord = LocalToPixelPoint(vertex);
+                sw.WriteLine("{0} {1}", coord.x, coord.y);
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
+        public void SaveTextureUVs()
+        {
+            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_uvs.txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            foreach (Vector2 uv in m_Mesh.uv)
+            {
+                //sw.WriteLine("{0} {1}", uv.x, 1.0 - uv.y);
+                sw.WriteLine("{0} {1}", Screen.width * uv.x, Screen.height * (1.0 - uv.y));
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
+        public void SaveTextureTriangles()
+        {
+            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_triangles.txt";
+            FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            for (int i = 0; i < m_Mesh.triangles.Length; i+=3)
+            {
+                sw.WriteLine("{0} {1} {2}", m_Mesh.triangles[i], m_Mesh.triangles[i + 1], m_Mesh.triangles[i + 2]);
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
+        public Vector2 LocalToPixelPoint(Vector3 coord)
+        {
+            // local space to world space
+            coord = transform.TransformPoint(coord);
+            // world space to screen space
+            coord = camera.WorldToScreenPoint(coord);
+            // screen spcae to pixel space
+            return new Vector2(coord.x, Screen.height - coord.y);
+        }
+
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 
 public class camera_button : MonoBehaviour
 {
-    public Camera camera;
-    public GameObject faceOccluder;
-    string path;
-    byte[] bytes;
+    private Camera camera;
+    private GameObject faceOccluder;
+    private string path;
+    private byte[] bytes;
 
 
     void Start()
@@ -27,6 +27,7 @@ public class camera_button : MonoBehaviour
     public void onClick()
     {
         faceOccluder.SendMessage("SaveMeshInfo", SendMessageOptions.DontRequireReceiver);
+        faceOccluder.SendMessage("SaveTextureInfo", SendMessageOptions.DontRequireReceiver);
         ScreenCapture();
         sendImage();
     }
