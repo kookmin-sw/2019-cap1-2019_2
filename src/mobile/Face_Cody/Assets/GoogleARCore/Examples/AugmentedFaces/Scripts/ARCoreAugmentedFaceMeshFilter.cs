@@ -48,7 +48,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
         private bool m_MeshInitialized = false;
         private Camera camera;
         private string path;
-
+        public string filename = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         /// <summary>
         /// Gets or sets the ARCore AugmentedFace object that will be used to update the face mesh data.
         /// </summary>
@@ -145,11 +145,12 @@ namespace GoogleARCore.Examples.AugmentedFaces
             SaveMeshVertices();
             SaveMeshUVs();
             SaveMeshTriangles();
+            img_data.filename = filename;
         }
 
         public void SaveMeshVertices()
         {
-            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_vertices.txt";
+            string name = path + "mesh/" + filename + "_vertices.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -165,7 +166,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveMeshUVs()
         {
-            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_uvs.txt";
+            string name = path + "mesh/" + filename + "_uvs.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -181,7 +182,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveMeshTriangles()
         {
-            string name = path + "mesh/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_triangles.txt";
+            string name = path + "mesh/" + filename + "_triangles.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -205,7 +206,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveTextureVertices()
         {
-            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_vertices.txt";
+            string name = path + "texture/" + filename + "_vertices.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -221,7 +222,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveTextureUVs()
         {
-            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_uvs.txt";
+            string name = path + "texture/" + filename + "_uvs.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -237,7 +238,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveTextureTriangles()
         {
-            string name = path + "texture/" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_triangles.txt";
+            string name = path + "texture/" + filename + "_triangles.txt";
             FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
