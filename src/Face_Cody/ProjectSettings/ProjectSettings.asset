@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Kookmin.Univ
   productName: Face_Cody
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -236,7 +236,6 @@ PlayerSettings:
   tvOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 0
   iOSRequireARKit: 0
-  iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@1.3.0
@@ -711,10 +710,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: f4c09f43-3965-4f32-8d01-c188d5ca9bce
+  cloudProjectId: 3b173607-7f0d-4fce-852b-0d21d1dc3500
   framebufferDepthMemorylessMode: 0
-  projectName: Face_Cody (2)
-  organizationId: fkdldhseogus
+  projectName: FaceCody
+  organizationId: ten_ability
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
