@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class record_flicker : MonoBehaviour
+public class Record_Flicker : MonoBehaviour
 {
     public GameObject record;
     public Button video_button;
-    public static record_flicker instance;
+    public static Record_Flicker instance;
 
     void Awake()
     {
