@@ -11,7 +11,7 @@ public class ConnectController : MonoBehaviour
     void Start()
     {
         //ipAddress = "192.168.0.101";
-        ipAddress = "172.22.151.23";
+        ipAddress = Global.ipAddress;
 
         if (!Directory.Exists(Global.logPath + "emotion/"))
         {
@@ -49,5 +49,36 @@ public class ConnectController : MonoBehaviour
         //}
 
         File.WriteAllBytes(string.Format("{0}emotion/{1}_happiness.txt", Global.logPath, name), webRequest.downloadHandler.data);
+    }
+
+    public void UploadImages()
+    {
+        StartCoroutine(RequestToUpload());
+    }
+    IEnumerator RequestToUpload()
+    {
+        string meshpath = Global.logPath + "/mesh/";
+        string texturepath = Global.logPath + "/texture/";
+
+        byte[] trgmesh = File.ReadAllBytes(meshpath + Global.targetImageName + "_vertices.txt");
+        byte[] trgtexture = File.ReadAllBytes(texturepath + Global.targetImageName + "_vertices.txt");
+        byte[] trgheadpose = File.ReadAllBytes(meshpath + Global.targetImageName + "_headPose.txt");
+
+        byte[] srcmesh = File.ReadAllBytes(meshpath + Global.sourceImageName + "_vertices.txt");
+        byte[] srctexture = File.ReadAllBytes(texturepath + Global.sourceImageName + "_vertices.txt");
+
+        WWWForm form = new WWWForm();
+
+        form.AddBinaryData("TargetMesh", trgmesh, Global.targetImageName + "_vertices.txt", "text/txt");
+        form.AddBinaryData("TargetTexture", trgtexture, Global.targetImageName + "_vertices.txt", "text/txt");
+        form.AddBinaryData("TargetHeadPose", trgheadpose, Global.targetImageName + "_headPose.txt", "text/txt");
+
+        form.AddBinaryData("SourceMesh", srcmesh, Global.sourceImageName + "_vertices.txt", "text/txt");
+        form.AddBinaryData("SourceTexture", srctexture, Global.sourceImageName + "_vertices.txt", "text/txt");
+
+        UnityWebRequest webRequest = UnityWebRequest.Post(string.Format("http://{0}:8000/server/upload", ipAddress), form);
+        yield return webRequest.SendWebRequest();
+
+        //File.WriteAllBytes(string.Format()) save result image
     }
 }

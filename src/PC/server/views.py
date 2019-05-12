@@ -22,3 +22,30 @@ def happiness(request):
 
     report = open("{}/data/emotion/{}_happiness.txt".format(WORKING_PATH, fileName), "rb").read()
     return HttpResponse(report, content_type="text/txt")
+
+
+@csrf_exempt
+def upload(request):
+    if request.method == 'POST':
+        TargetMesh = request.FILES['TargetMesh']
+        TargetTexture = request.FILES['TargetTexture']
+        TargetHeadPose = request.FILES['TargetHeadPose']
+        SourceMesh = request.FILES['SourceMesh']
+        SourceTexture = request.FILES['SourceTexture']
+
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, TargetMesh.name), ContentFile(TargetMesh.read()))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, TargetHeadPose.name), ContentFile(TargetHeadPose.read()))
+        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, TargetTexture.name), ContentFile(TargetTexture.read()))
+        
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, SourceMesh.name), ContentFile(SourceMesh.read()))
+        # default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, SourceHeadPose.name), ContentFile(SourceMesh.read()))
+        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, SourceTexture.name), ContentFile(SourceTexture.read()))
+
+        print(TargetMesh.name, SourceMesh.name)
+
+        #os.system() # 텍스처 이미지생성
+        #os.system() # 3d model
+        #os.system() # 합성
+
+    result = open("./black.png", "rb").read()
+    return HttpResponse(result, content_type = "image/png")
