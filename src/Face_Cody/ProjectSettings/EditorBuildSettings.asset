@@ -5,16 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/camera.unity
+  - enabled: 0
+    path: Assets/Scenes/face_cody.unity
     guid: ba9fa60bb19598a4a8fe7b55f19c07fe
   - enabled: 0
     path: 
-    guid: 36c6e64caa657714bae876545dfc83af
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/camera.unity
+    guid: fa6bf716ee21e4144a50b369ccfd6ea8
   - enabled: 1
     path: Assets/Scenes/gallery.unity
-    guid: b59233619fd3b481696161f8f4a7ba15
+    guid: 849df0d90875ba94586d0a2fcc8ab97a
   - enabled: 1
     path: Assets/Scenes/synthesis.unity
-    guid: 3f5a152bf68954a609041b2cce7739e7
+    guid: 57017b3d5db880f4d845b4c85c3cad74
   m_configObjects: {}

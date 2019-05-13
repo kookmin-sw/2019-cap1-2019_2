@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeadPoseControl : MonoBehaviour
+public class HeadPoseController : MonoBehaviour
 {
     public Texture[] direction = new Texture[4]; //up, down, left, right
     Color currColor;
