@@ -2,12 +2,16 @@ import sys
 import requests
 from config import *
 
-def LoadData(filePath):
+def load_data(filePath):
     # subscription_key = '65b094c8b7084d0b9e072125bfea8ed1'
-    subscription_key = 'e958e28cf18a40d7978ede06a69dcdda'
+    # subscription_key = 'e958e28cf18a40d7978ede06a69dcdda'
+    # subscription_key = 'fe5915d691a941a9858b5d23c8443e81'
+    subscription_key = '355730b2110541b490de53e86ca052a5'
+
     assert subscription_key
 
-    face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
+    # face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
+    face_api_url = 'https://koreacentral.api.cognitive.microsoft.com/face/v1.0/detect'
 
     data = open(filePath, 'rb').read()  
 
@@ -26,8 +30,8 @@ def LoadData(filePath):
     faces = response.json()
     return faces
 
-def EmotionAnalysis(fileName, emotion='happiness'):
-    faces = LoadData("{}/data/image/{}.png".format(WORKING_PATH, fileName))
+def emotion_analysis(fileName, emotion='happiness'):
+    faces = load_data("{}/data/image/{}.png".format(WORKING_PATH, fileName))
     face = faces[0]
     emotions = face['faceAttributes'].get('emotion')
     f = open("{}/data/emotion/{}_{}.txt".format(WORKING_PATH, fileName, emotion), "w")
@@ -36,4 +40,4 @@ def EmotionAnalysis(fileName, emotion='happiness'):
 
 
 if __name__ == '__main__':
-    EmotionAnalysis(sys.argv[1]) # params: fileName
+    emotion_analysis(sys.argv[1]) # params: fileName

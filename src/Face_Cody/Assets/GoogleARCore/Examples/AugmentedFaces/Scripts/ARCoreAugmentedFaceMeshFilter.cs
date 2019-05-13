@@ -37,7 +37,6 @@ namespace GoogleARCore.Examples.AugmentedFaces
         public bool AutoBind = false;
 
         public AugmentedFace m_AugmentedFace = null;
-        //private AugmentedFace m_AugmentedFace = null;
         private List<AugmentedFace> m_AugmentedFaceList = null;
 
         // Keep previous frame's mesh polygon to avoid mesh update every frame.
@@ -49,9 +48,6 @@ namespace GoogleARCore.Examples.AugmentedFaces
         private bool m_MeshInitialized = false;
         private Camera camera;
 
-        //public LineRenderer forward = null;
-        //public LineRenderer right   = null;
-        //public LineRenderer up      = null;
 
         /// <summary>
         /// Gets or sets the ARCore AugmentedFace object that will be used to update the face mesh data.
@@ -115,10 +111,6 @@ namespace GoogleARCore.Examples.AugmentedFaces
             transform.rotation = m_AugmentedFace.CenterPose.rotation;
 
             _UpdateMesh();
-
-            //DrawForwardLine();
-            //DrawRightLine();
-            //DrawUpLine();
         }
 
         /// <summary>
@@ -269,75 +261,6 @@ namespace GoogleARCore.Examples.AugmentedFaces
             // screen spcae to pixel space
             return new Vector2(coord.x, Screen.height - coord.y);
         }
-
-        //public void DrawForwardLine()
-        //{
-        //    if (forward != null)
-        //        Destroy(forward.gameObject);
-
-        //    forward = new GameObject("Forward").AddComponent<LineRenderer>();
-        //    forward.material = new Material(Shader.Find("Sprites/Default"));
-        //    forward.positionCount = 2;
-        //    forward.startWidth = 0.05f;
-        //    forward.endWidth = 0.05f;
-        //    forward.startColor = Color.red;
-        //    forward.endColor = Color.red;
-        //    forward.useWorldSpace = true;
-
-        //    Vector3 vec = m_AugmentedFace.CenterPose.forward * -1;
-        //    vec -= m_AugmentedFace.CenterPose.position;
-        //    vec /= 10;
-        //    vec += m_AugmentedFace.CenterPose.position;
-
-        //    forward.SetPosition(0, m_AugmentedFace.CenterPose.position);
-        //    forward.SetPosition(1, vec);
-        //}
-
-        //public void DrawRightLine()
-        //{
-        //    if (right != null)
-        //        Destroy(right.gameObject);
-
-        //    right = new GameObject("Left").AddComponent<LineRenderer>();
-        //    right.material = new Material(Shader.Find("Sprites/Default"));
-        //    right.positionCount = 2;
-        //    right.startWidth = 0.05f;
-        //    right.endWidth = 0.05f;
-        //    right.startColor = Color.blue;
-        //    right.endColor = Color.blue;
-        //    right.useWorldSpace = true;
-
-        //    Vector3 vec = m_AugmentedFace.CenterPose.right;
-        //    vec -= m_AugmentedFace.CenterPose.position;
-        //    vec /= 10;
-        //    vec += m_AugmentedFace.CenterPose.position;
-
-        //    right.SetPosition(0, m_AugmentedFace.CenterPose.position);
-        //    right.SetPosition(1, vec);
-        //}
-
-        //public void DrawUpLine()
-        //{
-        //    if (up != null)
-        //        Destroy(up.gameObject);
-
-        //    up = new GameObject("Line").AddComponent<LineRenderer>();
-        //    up.material = new Material(Shader.Find("Sprites/Default"));
-        //    up.positionCount = 2;
-        //    up.startWidth = 0.05f;
-        //    up.endWidth = 0.05f;
-        //    up.startColor = Color.green;
-        //    up.endColor = Color.green;
-        //    up.useWorldSpace = true;
-
-        //    Vector3 vec = m_AugmentedFace.CenterPose.up;
-        //    vec -= m_AugmentedFace.CenterPose.position;
-        //    vec /= 10;
-        //    vec += m_AugmentedFace.CenterPose.position;
-
-        //    up.SetPosition(0, m_AugmentedFace.CenterPose.position);
-        //    up.SetPosition(1, vec);
-        //}
 
         public Vector3 GetHeadPose() // Temporary code for printing the log
         {

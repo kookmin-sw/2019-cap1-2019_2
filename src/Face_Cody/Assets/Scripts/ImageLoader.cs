@@ -1,26 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class ImageLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Texture2D texture = null;
     private string imageName = "";
     public RawImage img;
 
-    void Start()
-    {
-    
-    }
-
     public void AttachImage()
     {
-        string path = Global.imgPath + imageName +".png";
+        string path = Global.imagePath + imageName +".png";
         byte[] byteTexture = System.IO.File.ReadAllBytes(path);
-        texture = new Texture2D(0, 0);
+        Texture2D texture = new Texture2D(0, 0);
         texture.LoadImage(byteTexture);
         img.GetComponent<RawImage>().texture = texture;
     }

@@ -55,9 +55,9 @@ public class ScreenCaptureController : MonoBehaviour
         connector = GameObject.Find("Connector");
         //numFrames = 0;
 
-        if (!Directory.Exists(Global.imgPath))
+        if (!Directory.Exists(Global.imagePath))
         {
-            Directory.CreateDirectory(Global.imgPath);
+            Directory.CreateDirectory(Global.imagePath);
         }
 
         //InvokeRepeating("ScreenCapture", 0.0f, 1.0f / frameRate);
@@ -87,7 +87,7 @@ public class ScreenCaptureController : MonoBehaviour
 
 
         byte[] imageBytes = screenShot.EncodeToPNG();
-        File.WriteAllBytes(string.Format("{0}.png",Global.imgPath + name), imageBytes);
+        File.WriteAllBytes(string.Format("{0}.png",Global.imagePath + name), imageBytes);
 
         //byte[] imageBytes = screenShot.GetRawTextureData();
         //FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);

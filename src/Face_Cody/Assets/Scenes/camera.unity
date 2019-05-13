@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -205,7 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26b41fa402fb204689af53a76c7e2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 1049685915}
 --- !u!23 &48933690
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -502,6 +501,14 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 586474ceba9476544a90a6b092423231, type: 3}
   - {fileID: 2800000, guid: 1933309ab50395b46ba78de7fb47cc31, type: 3}
   - {fileID: 2800000, guid: d8d3420bfca248944ad865fc2a8acc6f, type: 3}
+  currColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  opaque: 1
+  transparent: 0
+  headpose: {fileID: 0}
 --- !u!114 &415717133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,7 +767,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 595670757}
-        m_MethodName: onClick
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

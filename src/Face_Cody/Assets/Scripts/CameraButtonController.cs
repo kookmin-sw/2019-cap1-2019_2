@@ -14,7 +14,7 @@ public class CameraButtonController : MonoBehaviour
         screenCapturer = GameObject.Find("ScreenCapturer");
     }
 
-    public void onClick()
+    public void OnClick()
     {
         //cameraAudio.Play();
         string name = System.DateTime.Now.ToString("yyMMdd_HHmmss");

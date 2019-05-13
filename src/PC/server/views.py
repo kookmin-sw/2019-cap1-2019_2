@@ -10,6 +10,10 @@ from django.http import HttpResponse
 
 WORKING_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+def remove_duplicate_files(filePath):
+    if os.path.isfile(filePath):
+        os.remove(filePath)
+
 @csrf_exempt
 def happiness(request):
     if request.method == 'POST':
@@ -25,27 +29,36 @@ def happiness(request):
 
 
 @csrf_exempt
-def upload(request):
+def synthesis(request):
     if request.method == 'POST':
-        TargetMesh = request.FILES['TargetMesh']
-        TargetTexture = request.FILES['TargetTexture']
-        TargetHeadPose = request.FILES['TargetHeadPose']
-        SourceMesh = request.FILES['SourceMesh']
-        SourceTexture = request.FILES['SourceTexture']
+        targetTextureVertices = request.FILES['targetTextureVertices']
+        targetHeadPose        = request.FILES['targetHeadPose']
 
-        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, TargetMesh.name), ContentFile(TargetMesh.read()))
-        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, TargetHeadPose.name), ContentFile(TargetHeadPose.read()))
-        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, TargetTexture.name), ContentFile(TargetTexture.read()))
+        sourceTextureVertices = request.FILES['sourceTextureVertices']
+        sourceHeadPose        = request.FILES['sourceHeadPose']
+        sourceMeshVertices    = request.FILES['sourceMeshVertices']
+      
+        remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name))
+        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name), ContentFile(targetTextureVertices.read()))
+        remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, targetHeadPose.name))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, targetHeadPose.name), ContentFile(targetHeadPose.read()))
+
+        remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, sourceTextureVertices.name))
+        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, sourceTextureVertices.name), ContentFile(sourceTextureVertices.read()))
+        remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceHeadPose.name))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, sourceHeadPose.name), ContentFile(sourceHeadPose.read()))
+        remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshVertices.name))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshVertices.name), ContentFile(sourceMeshVertices.read()))
         
-        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, SourceMesh.name), ContentFile(SourceMesh.read()))
-        # default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, SourceHeadPose.name), ContentFile(SourceMesh.read()))
-        default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, SourceTexture.name), ContentFile(SourceTexture.read()))
+        print('Receiving data for synthesis is completed.')
+        
+        sourceName = os.path.splitext(sourceTextureVertices.name)[0]
+        sourceName = sourceName[:-9]
+        targetName = os.path.splitext(targetTextureVertices.name)[0]
+        targetName = targetName[:-9]
 
-        print(TargetMesh.name, SourceMesh.name)
-
-        #os.system() # 텍스처 이미지생성
+        #os.system() # unwrapping
         #os.system() # 3d model
         #os.system() # 합성
 
-    result = open("./black.png", "rb").read()
-    return HttpResponse(result, content_type = "image/png")
+    return HttpResponse("OK")

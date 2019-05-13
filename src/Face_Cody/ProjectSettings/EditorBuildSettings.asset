@@ -7,10 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/camera.unity
-    guid: ba9fa60bb19598a4a8fe7b55f19c07fe
-  - enabled: 0
-    path: 
-    guid: 36c6e64caa657714bae876545dfc83af
+    guid: 0bfd63af0a64a994ba98f66ed1fa0cdd
   - enabled: 1
     path: Assets/Scenes/gallery.unity
     guid: b59233619fd3b481696161f8f4a7ba15
