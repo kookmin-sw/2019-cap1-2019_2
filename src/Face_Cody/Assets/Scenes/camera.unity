@@ -1381,6 +1381,7 @@ GameObject:
   - component: {fileID: 1485349375}
   - component: {fileID: 1485349377}
   - component: {fileID: 1485349376}
+  - component: {fileID: 1485349378}
   m_Layer: 5
   m_Name: LeftArrow
   m_TagString: Untagged
@@ -1442,6 +1443,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485349374}
   m_CullTransparentMesh: 0
+--- !u!114 &1485349378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485349374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc353cef401a35498d401016ce31e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1574187362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,6 +1509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1664254168}
   - component: {fileID: 1664254167}
+  - component: {fileID: 1664254169}
   m_Layer: 5
   m_Name: CameraAudio
   m_TagString: Untagged
@@ -1514,7 +1528,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d90d694e499d16644b544b688f5213df, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1618,6 +1632,18 @@ RectTransform:
   m_AnchoredPosition: {x: 442, y: 260.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1664254169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664254166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6da89de7146d745bfd81a82ec1bfcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1668541721
 GameObject:
   m_ObjectHideFlags: 0
