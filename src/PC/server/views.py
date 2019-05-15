@@ -57,7 +57,8 @@ def synthesis(request):
         targetName = os.path.splitext(targetTextureVertices.name)[0]
         targetName = targetName[:-9]
 
-        #os.system() # unwrapping
+        os.system("python -B {}/utils/unwrapper.py {}".format(WORKING_PATH, sourceName)) # 텍스처 이미지생성
+        print('Unwrapping is done.')
         #os.system() # 3d model
         #os.system() # 합성
 
