@@ -10,7 +10,7 @@ public class CameraAudioController : MonoBehaviour
     void Start()
     {
         cameraAudio = GetComponent<AudioSource>();
-        GetComponent<AudioSource>().Stop();
+        cameraAudio.Stop();
     }
 
     public void playSound()

@@ -5,15 +5,19 @@ using UnityEngine.UI;
 
 public class HeadPoseController1 : MonoBehaviour
 {
-    Image downArrow, leftArrow, rightArrow, upArrow;
+    GameObject downArrow, leftArrow, rightArrow, upArrow;
 
     // Start is called before the first frame update
     void Start()
     {
-        downArrow = GameObject.Find("DownArrow").GetComponent<Image>();
-        leftArrow = GameObject.Find("LeftArrow").GetComponent<Image>();
-        rightArrow = GameObject.Find("RightArrow").GetComponent<Image>();
-        upArrow = GameObject.Find("UpArrow").GetComponent<Image>();
+        downArrow = GameObject.Find("DownArrow");
+        leftArrow = GameObject.Find("LeftArrow");
+        rightArrow = GameObject.Find("RightArrow");
+        upArrow = GameObject.Find("UpArrow");
+        downArrow.SetActive(false);
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
+        upArrow.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,67 +27,38 @@ public class HeadPoseController1 : MonoBehaviour
 
         if (pose.x < -5) //pitch - down
         {
-            //downArrow.SetActive(true);
-            //downArrow.sprite = direction[0];
-            //leftArrow.sprite = null;
-            //rightArrow.sprite = null;
-            //upArrow.sprite = null;
-
-            downArrow.enabled = true;
-            leftArrow.enabled = false;
-            rightArrow.enabled = false;
-            upArrow.enabled = false;
-
+            downArrow.SetActive(true);
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+            upArrow.SetActive(false);
         }
         else if (pose.x > 9) //pitch - up
         {
-            //downArrow.SetActive(false);
-            //downArrow.sprite = null;
-            //leftArrow.sprite = null;
-            //rightArrow.sprite = null;
-            //upArrow.sprite = direction[3];
-
-            downArrow.enabled = false;
-            leftArrow.enabled = false;
-            rightArrow.enabled = false;
-            upArrow.enabled = true;
+            downArrow.SetActive(false);
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+            upArrow.SetActive(true);
         }
         else if (pose.y > 10) //yaw
         {
-            //downArrow.SetActive(false);
-            //downArrow.sprite = null;
-            //leftArrow.sprite = direction[1];
-            //rightArrow.sprite = null;
-            //upArrow.sprite = null;
-
-            downArrow.enabled = false;
-            leftArrow.enabled = true;
-            rightArrow.enabled = false;
-            upArrow.enabled = false;
+            downArrow.SetActive(false);
+            leftArrow.SetActive(true);
+            rightArrow.SetActive(false);
+            upArrow.SetActive(false);
         }
         else if (pose.y < -10) //yaw
         {
-            //downArrow.SetActive(false);
-            //downArrow.sprite = null;
-            //leftArrow.sprite = null;
-            //rightArrow.sprite = direction[2];
-            //upArrow.sprite = null;
-            downArrow.enabled = false;
-            leftArrow.enabled = false;
-            rightArrow.enabled = true;
-            upArrow.enabled = false;
+            downArrow.SetActive(false);
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(true);
+            upArrow.SetActive(false);
         }
         else
         {
-            //downArrow.SetActive(false);
-            //downArrow.sprite = null;
-            //leftArrow.sprite = null;
-            //rightArrow.sprite = null;
-            //upArrow.sprite = null;
-            downArrow.enabled = false;
-            leftArrow.enabled = false;
-            rightArrow.enabled = false;
-            upArrow.enabled = false;
+            downArrow.SetActive(false);
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+            upArrow.SetActive(false);
         }
     }
 }
