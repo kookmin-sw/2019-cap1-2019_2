@@ -9,16 +9,16 @@ public class HeadPoseController : MonoBehaviour
     Color currColor;
     float opaque = 1.0f; //for rawimage color
     float transparent = 0.0f; //for rawimage color
-    RawImage headpose;
+    RawImage headPose;
 
     // Start is called before the first frame update
     void Start()
     {
-        headpose = gameObject.GetComponent<RawImage>();
+        headPose = gameObject.GetComponent<RawImage>();
 
-        currColor = headpose.color;
+        currColor = headPose.color;
         currColor.a = transparent;
-        headpose.color = currColor;
+        headPose.color = currColor;
     }
 
     // Update is called once per frame
@@ -29,32 +29,32 @@ public class HeadPoseController : MonoBehaviour
         if(pose.x < -5) //pitch
         {
             currColor.a = opaque;
-            headpose.color = currColor;
-            headpose.texture = direction[0]; //rotate down
+            headPose.color = currColor;
+            headPose.texture = direction[0]; //rotate down
         }
         else if (pose.x > 9) //pitch
         {
             currColor.a = opaque;
-            headpose.color = currColor;
-            headpose.texture = direction[1]; //rotate up
+            headPose.color = currColor;
+            headPose.texture = direction[1]; //rotate up
         }
         else if (pose.y > 10) //yaw
         {
             currColor.a = opaque;
-            headpose.color = currColor;
-            headpose.texture = direction[2]; //rotate left
+            headPose.color = currColor;
+            headPose.texture = direction[2]; //rotate left
         }
         else if (pose.y < -10) //yaw
         {
             currColor.a = opaque;
-            headpose.color = currColor;
-            headpose.texture = direction[3]; //rotate right
+            headPose.color = currColor;
+            headPose.texture = direction[3]; //rotate right
         }
         else
         {
             currColor.a = transparent;
-            headpose.color = currColor;
-            headpose.texture = null;
+            headPose.color = currColor;
+            headPose.texture = null;
         }
     }
 }

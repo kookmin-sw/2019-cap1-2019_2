@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class GalleryController : MonoBehaviour
 {
-    private List<string> imageNames = new List<string>();
+    private List<string> imageNames;
     public GameObject image;
 
     private void Start()
@@ -16,8 +15,10 @@ public class GalleryController : MonoBehaviour
 
     private void UpdateImageList()
     {
-        System.IO.DirectoryInfo dictInfo = new System.IO.DirectoryInfo(Global.imgPath);
-        foreach (System.IO.FileInfo File in dictInfo.GetFiles())
+        imageNames = new List<string>();
+
+        DirectoryInfo dictInfo = new DirectoryInfo(Global.imagePath);
+        foreach (FileInfo File in dictInfo.GetFiles())
         {
             if (File.Extension.ToLower() == ".png")
             {
@@ -31,7 +32,7 @@ public class GalleryController : MonoBehaviour
     {
         foreach (string imageName in imageNames)
         {
-            GameObject imageObject = GameObject.Instantiate(image, transform.position, transform.rotation);
+            GameObject imageObject = Instantiate(image, transform.position, transform.rotation);
             imageObject.transform.SetParent(GameObject.Find("Grid").transform, false);
             imageObject.GetComponent<ImageLoader>().SetImageName(imageName);
             imageObject.GetComponent<ImageLoader>().AttachImage();

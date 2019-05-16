@@ -13,7 +13,7 @@ public class CameraButtonController : MonoBehaviour
         screenCapturer = GameObject.Find("ScreenCapturer");
     }
 
-    public void onClick()
+    public void OnClick()
     {
         string name = System.DateTime.Now.ToString("yyMMdd_HHmmss");
         screenCapturer.GetComponent<ScreenCaptureController>().ScreenCapture(name);

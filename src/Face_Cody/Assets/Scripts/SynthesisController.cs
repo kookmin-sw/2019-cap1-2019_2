@@ -1,60 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 using System.IO;
 
 public class SynthesisController : MonoBehaviour
 {
-    byte[] trgByte;
-    byte[] srcByte;
-    private GameObject connector;
+    private GameObject targetImage;
+    private GameObject sourceImage;
 
     void Start()
     {
-        connector = GameObject.Find("Connector");
-        load();
+        targetImage = GameObject.Find("TargetImage");
+        sourceImage = GameObject.Find("SourceImage");
+        LoadImages();
     }
-    void Update()
+
+    private void LoadImages()
     {
+        if(Global.sourceImageName != "")
+        {
+            AttachImage(sourceImage, Global.sourceImageName);
+        }
+        if(Global.targetImageName != "")
+        {
+            AttachImage(targetImage, Global.targetImageName);
+        }
     }
 
-    public void load()
+    private void AttachImage(GameObject gameObject, string imageName)
     {
-        if(Global.sourceImageName != "" && Global.targetImageName != "")
-        {
-            trgByte = System.IO.File.ReadAllBytes(Global.imgPath + Global.targetImageName + ".png");
-            Texture2D trg = new Texture2D(0, 0);
-            trg.LoadImage(trgByte);
-
-            srcByte = System.IO.File.ReadAllBytes(Global.imgPath + Global.sourceImageName + ".png");
-            Texture2D src = new Texture2D(0, 0);
-            src.LoadImage(srcByte);
-
-            GameObject.Find("TargetImage").GetComponent<RawImage>().texture = trg;
-            GameObject.Find("SourceImage").GetComponent<RawImage>().texture = src;
-        }
-        else if(Global.sourceImageName == "")
-        {
-            trgByte = System.IO.File.ReadAllBytes(Global.imgPath + Global.targetImageName + ".png");
-            Texture2D trg = new Texture2D(0, 0);
-            trg.LoadImage(trgByte);
-
-            GameObject.Find("TargetImage").GetComponent<RawImage>().texture = trg;
-
-        }
-        else if(Global.targetImageName == "")
-        {
-            srcByte = System.IO.File.ReadAllBytes(Global.imgPath + Global.sourceImageName + ".png");
-            Texture2D src = new Texture2D(0, 0);
-            src.LoadImage(srcByte);
-
-            GameObject.Find("SourceImage").GetComponent<RawImage>().texture = src;
-
-        }
+        byte[] bytes = File.ReadAllBytes(string.Format("{0}.png", Global.imagePath + imageName));
+        Texture2D texture = new Texture2D(0, 0);
+        texture.LoadImage(bytes);
+        gameObject.GetComponent<RawImage>().texture = texture;
     }
+
     public void ToTargetMode()
     {
         Global.selectMode = false;
@@ -65,7 +44,17 @@ public class SynthesisController : MonoBehaviour
     }
     public void OnClick()
     {
-        connector.GetComponent<ConnectController>().UploadImages();
+        if(Global.sourceImageName == "")
+        {
+            return;
+        }
+        else if (Global.targetImageName == "")
+        {
+            return;
+        }
+        else
+        {
+            GameObject.Find("Connector").GetComponent<ConnectController>().SaveSynthesizedImage();
+        }
     }
-
 }
