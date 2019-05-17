@@ -6,11 +6,15 @@ public class SynthesisController : MonoBehaviour
 {
     private GameObject targetImage;
     private GameObject sourceImage;
+    private Text targetText;
+    private Text sourceText;
 
     void Start()
     {
         targetImage = GameObject.Find("TargetImage");
         sourceImage = GameObject.Find("SourceImage");
+        targetText = GameObject.Find("TargetText").GetComponent<Text>();
+        sourceText = GameObject.Find("SourceText").GetComponent<Text>();
         LoadImages();
     }
 
@@ -18,11 +22,21 @@ public class SynthesisController : MonoBehaviour
     {
         if(Global.sourceImageName != "")
         {
+            sourceText.text = "";
             AttachImage(sourceImage, Global.sourceImageName);
+        }
+        else
+        {
+            sourceText.text = "Select Image";
         }
         if(Global.targetImageName != "")
         {
+            targetText.text = "";
             AttachImage(targetImage, Global.targetImageName);
+        }
+        else
+        {
+            targetText.text = "Select Image";
         }
     }
 

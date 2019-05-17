@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}  
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 302815095}
   - component: {fileID: 302815097}
   - component: {fileID: 302815096}
+  - component: {fileID: 302815098}
   m_Layer: 5
   m_Name: DownArrow
   m_TagString: Untagged
@@ -322,6 +323,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302815094}
   m_CullTransparentMesh: 0
+--- !u!114 &302815098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302815094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367b37f498bfcdd4a9e80766fe920506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347441567
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &415717131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -573,14 +586,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 586474ceba9476544a90a6b092423231, type: 3}
   - {fileID: 2800000, guid: 1933309ab50395b46ba78de7fb47cc31, type: 3}
   - {fileID: 2800000, guid: d8d3420bfca248944ad865fc2a8acc6f, type: 3}
-  currColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  opaque: 1
-  transparent: 0
-  headpose: {fileID: 0}
 --- !u!114 &415717133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,7 +669,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 473152920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b509f80b9cdfb4691a348ed247ff58, type: 3}
+  m_Script: {fileID: 11500000, guid: 40f5c90a6a184424c9ae8d1d80fa7a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &473152923
@@ -1290,13 +1295,14 @@ GameObject:
   - component: {fileID: 1476074601}
   - component: {fileID: 1476074603}
   - component: {fileID: 1476074602}
+  - component: {fileID: 1476074604}
   m_Layer: 5
   m_Name: UpArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1476074601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1351,6 +1357,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476074600}
   m_CullTransparentMesh: 0
+--- !u!114 &1476074604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476074600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbb6cf61a5155b40854835bba168ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1485349374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,13 +1380,14 @@ GameObject:
   - component: {fileID: 1485349375}
   - component: {fileID: 1485349377}
   - component: {fileID: 1485349376}
+  - component: {fileID: 1485349378}
   m_Layer: 5
   m_Name: LeftArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1485349375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1423,6 +1442,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485349374}
   m_CullTransparentMesh: 0
+--- !u!114 &1485349378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485349374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc353cef401a35498d401016ce31e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1574187362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,7 +1793,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1746556593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b509f80b9cdfb4691a348ed247ff58, type: 3}
+  m_Script: {fileID: 11500000, guid: 40f5c90a6a184424c9ae8d1d80fa7a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1746556596
@@ -1909,13 +1940,14 @@ GameObject:
   - component: {fileID: 1809115737}
   - component: {fileID: 1809115739}
   - component: {fileID: 1809115738}
+  - component: {fileID: 1809115740}
   m_Layer: 5
   m_Name: RightArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1809115737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1970,6 +2002,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809115736}
   m_CullTransparentMesh: 0
+--- !u!114 &1809115740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809115736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201a7033245ec1f49a48e0d3d5530c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837422063
 GameObject:
   m_ObjectHideFlags: 0

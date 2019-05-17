@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 298583381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d48e9d196d60f4fc68ba30700ec82734, type: 3}
+  m_Script: {fileID: 11500000, guid: 83d39e5e25e570e469016acd75b91e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4, guid: d172ddf013cee4ceb9612868e976ad92, type: 3}
@@ -193,8 +193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 0, y: 90}
+  m_SizeDelta: {x: 1450, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464902205
 MonoBehaviour:
@@ -228,10 +228,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.9372549, g: 0.8627451, b: 0.8352941, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_PressedColor: {r: 0.7372549, g: 0.6666667, b: 0.6431373, a: 1}
+    m_DisabledColor: {r: 0.93725497, g: 0.86274517, b: 0.8352942, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -403,7 +403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -133.40015}
+  m_AnchoredPosition: {x: 0, y: -133.49988}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.95}
 --- !u!114 &828967307
@@ -518,8 +518,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 38.898438}
-  m_SizeDelta: {x: 0, y: -292}
+  m_AnchoredPosition: {x: 0, y: 39.898438}
+  m_SizeDelta: {x: 0, y: -290}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855862649
 MonoBehaviour:
@@ -922,7 +922,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC120\uD0DD"
+  m_Text: Next
 --- !u!222 &2072084674
 CanvasRenderer:
   m_ObjectHideFlags: 0
