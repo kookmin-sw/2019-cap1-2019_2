@@ -8,9 +8,9 @@ public class ConnectController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!Directory.Exists(Global.logPath + "emotion/"))
+        if (!Directory.Exists(Global.logPath + "/emotion/"))
         {
-            Directory.CreateDirectory(Global.logPath + "emotion/");
+            Directory.CreateDirectory(Global.logPath + "/emotion/");
         }
     }
 
@@ -26,7 +26,7 @@ public class ConnectController : MonoBehaviour
         UnityWebRequest webRequest = UnityWebRequest.Post(string.Format("http://{0}:8000/server/happiness", Global.ipAddress), form);
         yield return webRequest.SendWebRequest();
 
-        File.WriteAllBytes(string.Format("{0}emotion/{1}_happiness.txt", Global.logPath, name), webRequest.downloadHandler.data);
+        File.WriteAllBytes(string.Format("{0}/emotion/{1}_happiness.txt", Global.logPath, name), webRequest.downloadHandler.data);
     }
 
     public void SaveSynthesizedImage()
@@ -35,28 +35,28 @@ public class ConnectController : MonoBehaviour
     }
     IEnumerator RequestToSynthesis()
     {
-        string meshPath = Global.logPath + "/mesh/";
-        string texturePath = Global.logPath + "/texture/";
+        string meshPath = Global.logPath + "/mesh";
+        string texturePath = Global.logPath + "/texture";
 
-        byte[] targetTextureVertices = File.ReadAllBytes(texturePath + Global.targetImageName + "_vertices.txt");
-        byte[] targetHeadPose = File.ReadAllBytes(meshPath + Global.targetImageName + "_headPose.txt");
-        
-        byte[] sourceTextureVertices = File.ReadAllBytes(texturePath + Global.sourceImageName + "_vertices.txt");
-        byte[] sourceHeadPose = File.ReadAllBytes(meshPath + Global.sourceImageName + "_headPose.txt");
-        byte[] sourceMeshVertices = File.ReadAllBytes(meshPath + Global.sourceImageName + "_vertices.txt");
-        
+        byte[] targetMeshHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", meshPath, Global.targetImageName));
+        byte[] targetTextureHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", texturePath, Global.targetImageName));
+        byte[] targetTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.targetImageName));
+
+        byte[] sourceMeshVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", meshPath, Global.sourceImageName));
+        byte[] sourceTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.sourceImageName));
+
         WWWForm form = new WWWForm();
 
+        form.AddBinaryData("targetMeshHeadPose", targetMeshHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
+        form.AddBinaryData("targetTextureHeadPose", targetTextureHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("targetTextureVertices", targetTextureVertices, Global.targetImageName + "_vertices.txt", "text/txt");
-        form.AddBinaryData("targetHeadPose", targetHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
 
-        form.AddBinaryData("sourceTextureVertices", sourceTextureVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
-        form.AddBinaryData("sourceHeadPose", sourceHeadPose, Global.sourceImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("sourceMeshVertices", sourceMeshVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
+        form.AddBinaryData("sourceTextureVertices", sourceTextureVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
 
         UnityWebRequest webRequest = UnityWebRequest.Post(string.Format("http://{0}:8000/server/synthesis", Global.ipAddress), form);
         yield return webRequest.SendWebRequest();
 
-        //File.WriteAllBytes(string.Format()) save result image
+        File.WriteAllBytes(string.Format("{0}/{1}+{2}.png", Global.imagePath, Global.targetImageName, Global.sourceImageName), webRequest.downloadHandler.data);
     }
 }

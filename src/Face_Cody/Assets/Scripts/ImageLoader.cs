@@ -8,7 +8,7 @@ public class ImageLoader : MonoBehaviour
 
     public void AttachImage()
     {
-        string path = Global.imagePath + imageName +".png";
+        string path = string.Format("{0}/{1}.png", Global.imagePath, imageName);
         byte[] byteTexture = System.IO.File.ReadAllBytes(path);
         Texture2D texture = new Texture2D(0, 0);
         texture.LoadImage(byteTexture);

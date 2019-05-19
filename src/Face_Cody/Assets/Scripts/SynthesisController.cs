@@ -42,7 +42,7 @@ public class SynthesisController : MonoBehaviour
 
     private void AttachImage(GameObject gameObject, string imageName)
     {
-        byte[] bytes = File.ReadAllBytes(string.Format("{0}.png", Global.imagePath + imageName));
+        byte[] bytes = File.ReadAllBytes(string.Format("{0}/{1}.png", Global.imagePath, imageName));
         Texture2D texture = new Texture2D(0, 0);
         texture.LoadImage(bytes);
         gameObject.GetComponent<RawImage>().texture = texture;

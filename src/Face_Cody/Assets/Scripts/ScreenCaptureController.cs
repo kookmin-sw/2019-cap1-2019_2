@@ -87,7 +87,7 @@ public class ScreenCaptureController : MonoBehaviour
 
 
         byte[] imageBytes = screenShot.EncodeToPNG();
-        File.WriteAllBytes(string.Format("{0}.png",Global.imagePath + name), imageBytes);
+        File.WriteAllBytes(string.Format("{0}/{1}.png",Global.imagePath, name), imageBytes);
 
         //byte[] imageBytes = screenShot.GetRawTextureData();
         //FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write);

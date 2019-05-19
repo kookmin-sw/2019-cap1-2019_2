@@ -76,13 +76,13 @@ namespace GoogleARCore.Examples.AugmentedFaces
             m_AugmentedFaceList = new List<AugmentedFace>();
             camera = GameObject.Find("First Person Camera").GetComponent<Camera>();
 
-            if (!Directory.Exists(Global.logPath + "mesh/"))
+            if (!Directory.Exists(Global.logPath + "/mesh/"))
             {
-                Directory.CreateDirectory(Global.logPath + "mesh/");
+                Directory.CreateDirectory(Global.logPath + "/mesh/");
             }
-            if (!Directory.Exists(Global.logPath + "texture/"))
+            if (!Directory.Exists(Global.logPath + "/texture/"))
             {
-                Directory.CreateDirectory(Global.logPath + "texture/");
+                Directory.CreateDirectory(Global.logPath + "/texture/");
             }
         }
 
@@ -144,12 +144,12 @@ namespace GoogleARCore.Examples.AugmentedFaces
             SaveMeshVertices(name);
             //SaveMeshUVs(name);
             //SaveMeshTriangles(name);
-            SaveHeadPose(name);
+            SaveMeshHeadPose(name);
         }
 
         public void SaveMeshVertices(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}mesh/{1}_vertices.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/mesh/{1}_vertices.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
             foreach (Vector3 vertex in m_Mesh.vertices)
@@ -163,7 +163,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveMeshUVs(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}mesh/{1}_uvs.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/mesh/{1}_uvs.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
 
@@ -178,7 +178,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveMeshTriangles(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}mesh/{1}_triangles.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/mesh/{1}_triangles.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
             foreach (int index in m_Mesh.triangles)
@@ -190,11 +190,13 @@ namespace GoogleARCore.Examples.AugmentedFaces
             fs.Close();
         }
 
-        public void SaveHeadPose(string name)
+        public void SaveMeshHeadPose(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}mesh/{1}_headPose.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/mesh/{1}_headPose.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
+            Vector3 center = m_AugmentedFace.CenterPose.position - transform.position;
+            sw.WriteLine("{0} {1} {2}", center.x, center.y, center.z);
             sw.WriteLine("{0} {1} {2}", Vector3.Angle(new Vector3(0.0f, 0.1f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
                                         Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
                                         Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f), m_AugmentedFace.CenterPose.up - m_AugmentedFace.CenterPose.position) - 90f);
@@ -207,11 +209,12 @@ namespace GoogleARCore.Examples.AugmentedFaces
             SaveTextureVertices(name);
             //SaveTextureUVs(name);
             //SaveTextureTriangles(name);
+            SaveTextureHeadPose(name);
         }
 
         public void SaveTextureVertices(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}texture/{1}_vertices.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/texture/{1}_vertices.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
             foreach (Vector3 vertex in m_Mesh.vertices)
@@ -226,7 +229,7 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveTextureUVs(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}texture/{1}_uvs.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/texture/{1}_uvs.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
             foreach (Vector2 uv in m_Mesh.uv)
@@ -240,13 +243,25 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
         public void SaveTextureTriangles(string name)
         {
-            FileStream fs = new FileStream(string.Format("{0}texture/{1}_triangles.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(string.Format("{0}/texture/{1}_triangles.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
             for (int i = 0; i < m_Mesh.triangles.Length; i += 3)
             {
                 sw.WriteLine("{0} {1} {2}", m_Mesh.triangles[i], m_Mesh.triangles[i + 1], m_Mesh.triangles[i + 2]);
             }
+
+            sw.Close();
+            fs.Close();
+        }
+
+        public void SaveTextureHeadPose(string name)
+        {
+            FileStream fs = new FileStream(string.Format("{0}/texture/{1}_headPose.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            Vector2 center = LocalToPixelPoint(m_AugmentedFace.CenterPose.position - transform.position);
+            sw.WriteLine("{0} {1}", center.x, center.y);
 
             sw.Close();
             fs.Close();
