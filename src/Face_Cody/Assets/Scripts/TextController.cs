@@ -17,7 +17,7 @@ public class TextController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 pose = GameObject.Find("FaceOccluder").GetComponent<GoogleARCore.Examples.AugmentedFaces.ARCoreAugmentedFaceMeshFilter>().GetHeadPose();
-        text.text = string.Format("Pitch:\t{0}\nYaw :\t{1}\nRoll  :\t{2}", pose.x, pose.y, pose.z);
+        //Vector3 pose = GameObject.Find("FaceOccluder").GetComponent<GoogleARCore.Examples.AugmentedFaces.ARCoreAugmentedFaceMeshFilter>().GetHeadPose();
+        //text.text = string.Format("Pitch:\t{0}\nYaw :\t{1}\nRoll  :\t{2}", pose.x, pose.y, pose.z);
     }
 }
