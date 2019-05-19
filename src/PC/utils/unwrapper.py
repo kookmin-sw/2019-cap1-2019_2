@@ -9,7 +9,7 @@ class Texture:
             self.image = cv2.imread("{}\\data\\image\\{}.png".format(WORKING_PATH, fileName))
             self.vertices = self.load_data("{}\\data\\texture\\{}_vertices.txt".format(WORKING_PATH, fileName))
         else:
-            self.image = cv2.imread("{}\\data\\texture\\black.png".format(WORKING_PATH))
+            self.image = np.zeros(shape=(IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNEL), dtype=np.uint8)
             self.vertices = self.load_data("{}\\data\\texture\\uvs.txt".format(WORKING_PATH))
         
         self.triangles = self.get_triangles()
