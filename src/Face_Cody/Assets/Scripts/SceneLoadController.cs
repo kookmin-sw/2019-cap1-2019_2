@@ -24,4 +24,8 @@ public class SceneLoadController : MonoBehaviour
     {
         SceneManager.LoadScene("camera");
     }
+    public void MoveToLoading()
+    {
+        SceneManager.LoadScene("loading");
+    }
 }
