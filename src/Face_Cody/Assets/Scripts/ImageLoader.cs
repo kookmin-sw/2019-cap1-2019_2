@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ImageLoader : MonoBehaviour
 {
+    private bool isClicked = false;
     private string imageName = "";
     public RawImage img;
 
@@ -18,16 +19,51 @@ public class ImageLoader : MonoBehaviour
     {
         if(Global.selectMode == false)
         {
-            Global.targetImageName = imageName;
+            if (isClicked == false)
+            {
+                //if (Global.targetImageName != imageName && Global.targetImageName != "")
+                //{
+                //    alertMessage = true;
+                //}
+                if (Global.targetImageName == imageName || Global.targetImageName == "")
+                {
+                    isClicked = true;
+                    img.GetComponent<RawImage>().color = Color.gray;
+                    Global.targetImageName = imageName;
+                }
+            }
+            else
+            {
+                isClicked = false;
+                img.GetComponent<RawImage>().color = Color.white;
+                Global.targetImageName = "";
+            }
         }
         else
         {
-            Global.sourceImageName = imageName;
+            if (isClicked == false)
+            {
+                isClicked = true;
+                img.GetComponent<RawImage>().color = Color.gray;
+                Global.sourceImageName = imageName;
+            }
+            else
+            {
+                isClicked = false;
+                img.GetComponent<RawImage>().color = Color.white;
+                Global.sourceImageName = "";
+            }
         }
 
     }
+
     public void SetImageName(string name)
     {
         imageName = name;
+    }
+    
+    public void SetWhite()
+    {
+        img.GetComponent<RawImage>().color = Color.white;
     }
 }

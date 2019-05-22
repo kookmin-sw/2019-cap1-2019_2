@@ -6,6 +6,7 @@ public class GalleryController : MonoBehaviour
 {
     private List<string> imageNames;
     public GameObject image;
+    private GameObject imageObject;
 
     private void Start()
     {
@@ -32,11 +33,14 @@ public class GalleryController : MonoBehaviour
     {
         foreach (string imageName in imageNames)
         {
-            GameObject imageObject = Instantiate(image, transform.position, transform.rotation);
+            imageObject = Instantiate(image, transform.position, transform.rotation);
             imageObject.transform.SetParent(GameObject.Find("Grid").transform, false);
+            Vector3 newScale = imageObject.transform.localScale;
+            newScale *= 1.5f;
+            imageObject.transform.localScale = newScale;
             imageObject.GetComponent<ImageLoader>().SetImageName(imageName);
             imageObject.GetComponent<ImageLoader>().AttachImage();
+            imageObject.GetComponent<ImageLoader>().SetWhite();
         }
     }
 }
-
