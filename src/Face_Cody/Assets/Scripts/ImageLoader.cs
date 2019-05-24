@@ -43,9 +43,12 @@ public class ImageLoader : MonoBehaviour
         {
             if (isClicked == false)
             {
-                isClicked = true;
-                img.GetComponent<RawImage>().color = Color.gray;
-                Global.sourceImageName = imageName;
+                if (Global.sourceImageName == imageName || Global.sourceImageName == "")
+                {
+                    isClicked = true;
+                    img.GetComponent<RawImage>().color = Color.gray;
+                    Global.sourceImageName = imageName;
+                }
             }
             else
             {
