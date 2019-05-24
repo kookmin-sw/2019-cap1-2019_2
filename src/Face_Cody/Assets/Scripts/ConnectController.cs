@@ -57,6 +57,9 @@ public class ConnectController : MonoBehaviour
         UnityWebRequest webRequest = UnityWebRequest.Post(string.Format("http://{0}:8000/server/synthesis", Global.ipAddress), form);
         yield return webRequest.SendWebRequest();
 
-        File.WriteAllBytes(string.Format("{0}/{1}+{2}.png", Global.imagePath, Global.targetImageName, Global.sourceImageName), webRequest.downloadHandler.data);
+
+        //GameObject.Find("SynthesisController").GetComponent<SynthesisController>().SaveImages(webRequest.downloadHandler.data);
+        // image save
+        //File.WriteAllBytes(string.Format("{0}/{1}+{2}.png", Global.imagePath, Global.targetImageName, Global.sourceImageName), webRequest.downloadHandler.data);
     }
 }

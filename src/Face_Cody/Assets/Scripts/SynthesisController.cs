@@ -9,15 +9,32 @@ public class SynthesisController : MonoBehaviour
     private Text targetText;
     private Text sourceText;
 
+    private GameObject savePanel;
+    private GameObject synthesisPanel;
+    private GameObject loadPanel;
+
+    float angle = 0.0f;
+
     void Start()
     {
         targetImage = GameObject.Find("TargetImage");
         sourceImage = GameObject.Find("SourceImage");
         targetText = GameObject.Find("TargetText").GetComponent<Text>();
         sourceText = GameObject.Find("SourceText").GetComponent<Text>();
+        savePanel = GameObject.Find("SavePanel");
+        synthesisPanel = GameObject.Find("SynthesisPanel");
+        loadPanel = GameObject.Find("LoadingSign");
+
+        //synthesisPanel.SetActive(false);
+        savePanel.SetActive(false);
+        loadPanel.SetActive(false);
         LoadImages();
     }
-
+    void Update()
+    {
+        angle += Time.deltaTime * -30.0f;
+        loadPanel.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
+    }
     private void LoadImages()
     {
         if(Global.sourceImageName != "")
@@ -69,6 +86,24 @@ public class SynthesisController : MonoBehaviour
         else
         {
             GameObject.Find("Connector").GetComponent<ConnectController>().SaveSynthesizedImage();
+            synthesisPanel.SetActive(false);
+            loadPanel.SetActive(true);
         }
+    }
+
+    public void SaveImages(byte[] bytes)
+    {
+        loadPanel.SetActive(false);
+        savePanel.SetActive(true);
+        // change raw image 
+        // save to gallery
+    }
+    private void SaveToGallery(byte[] bytes)
+    {
+        Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        texture.LoadImage(bytes);
+        texture.Apply();
+
+        Debug.Log("" + NativeGallery.SaveImageToGallery(texture, "FaceCody", "Screenshot_" + System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + "{0}.png"));
     }
 }
