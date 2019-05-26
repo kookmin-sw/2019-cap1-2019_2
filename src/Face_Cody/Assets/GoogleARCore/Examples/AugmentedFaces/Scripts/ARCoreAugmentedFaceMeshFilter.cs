@@ -197,9 +197,10 @@ namespace GoogleARCore.Examples.AugmentedFaces
 
             Vector3 center = m_AugmentedFace.CenterPose.position - transform.position;
             sw.WriteLine("{0} {1} {2}", center.x, center.y, center.z);
-            sw.WriteLine("{0} {1} {2}", Vector3.Angle(new Vector3(0.0f, 0.1f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
-                                        Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
-                                        Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f), m_AugmentedFace.CenterPose.up - m_AugmentedFace.CenterPose.position) - 90f);
+            
+            Vector3 pose = GetHeadPose();
+            sw.WriteLine("{0} {1} {2}", pose.x, pose.y, pose.z);
+            
             sw.Close();
             fs.Close();
         }
@@ -277,12 +278,15 @@ namespace GoogleARCore.Examples.AugmentedFaces
             return new Vector2(coord.x, Screen.height - coord.y);
         }
 
-        public Vector3 GetHeadPose() // Temporary code for printing the log
+        public Vector3 GetHeadPose()
         {
+            Vector3 forward = (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position;
+            Vector3 up = m_AugmentedFace.CenterPose.up - m_AugmentedFace.CenterPose.position;
+
             return new Vector3(
-                Vector3.Angle(new Vector3(0.0f, 0.1f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
-                Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f), (m_AugmentedFace.CenterPose.forward * -1) - m_AugmentedFace.CenterPose.position) - 90f,
-                Vector3.Angle(new Vector3(0.1f, 0.0f, 0.0f),  m_AugmentedFace.CenterPose.up            - m_AugmentedFace.CenterPose.position) - 90f);
+                Vector3.Angle(new Vector3(0f, 1f, 0f), new Vector3(0f, forward.y, forward.z)) - 90f,
+                Vector3.Angle(new Vector3(1f, 0f, 0f), new Vector3(forward.x, 0f, forward.z)) - 90f,
+                Vector3.Angle(new Vector3(1f, 0f, 0f), new Vector3(up.x,    up.y,        0f)) - 90f);
         }
     }
 }
