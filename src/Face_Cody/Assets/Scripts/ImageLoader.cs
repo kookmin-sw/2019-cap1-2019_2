@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ImageLoader : MonoBehaviour
 {
-    private bool isClicked = false;
     private string imageName = "";
     public RawImage img;
 
@@ -15,58 +14,51 @@ public class ImageLoader : MonoBehaviour
         texture.LoadImage(byteTexture);
         img.GetComponent<RawImage>().texture = texture;
     }
+
     public void OnClick()
     {
-        if(Global.selectMode == false)
+        if(Global.selectMode == 1) // select target image
         {
-            if (isClicked == false)
+            if(Global.targetImageName != "")
             {
-                //if (Global.targetImageName != imageName && Global.targetImageName != "")
-                //{
-                //    alertMessage = true;
-                //}
-                if (Global.targetImageName == imageName || Global.targetImageName == "")
-                {
-                    isClicked = true;
-                    img.GetComponent<RawImage>().color = Color.gray;
-                    Global.targetImageName = imageName;
-                }
-            }
-            else
-            {
-                isClicked = false;
-                img.GetComponent<RawImage>().color = Color.white;
-                Global.targetImageName = "";
-            }
-        }
-        else
-        {
-            if (isClicked == false)
-            {
-                if (Global.sourceImageName == imageName || Global.sourceImageName == "")
-                {
-                    isClicked = true;
-                    img.GetComponent<RawImage>().color = Color.gray;
-                    Global.sourceImageName = imageName;
-                }
-            }
-            else
-            {
-                isClicked = false;
-                img.GetComponent<RawImage>().color = Color.white;
-                Global.sourceImageName = "";
-            }
-        }
+                GameObject oldTargetImage = GameObject.FindWithTag("TargetImage");
+                oldTargetImage.GetComponent<ImageLoader>().SetMark(false);
+                oldTargetImage.tag = "Untagged";
+            }            
 
+            Global.targetImageName = imageName;
+            gameObject.tag = "TargetImage";
+            SetMark(true);
+        }
+        else if(Global.selectMode == 2)// select source image
+        {
+            if(Global.sourceImageName != "")
+            {
+                GameObject oldSourceImage = GameObject.FindWithTag("SourceImage");
+                oldSourceImage.GetComponent<ImageLoader>().SetMark(false);
+                oldSourceImage.tag = "Untagged";
+            }
+
+            Global.sourceImageName = imageName;
+            gameObject.tag = "SourceImage";
+            SetMark(true);
+        }
     }
 
     public void SetImageName(string name)
     {
         imageName = name;
     }
-    
-    public void SetWhite()
+
+    public void SetMark(bool isMark)
     {
-        img.GetComponent<RawImage>().color = Color.white;
+        if(isMark == true)
+        {
+            img.GetComponent<RawImage>().color = Color.gray;
+        }
+        else
+        {
+            img.GetComponent<RawImage>().color = Color.white;
+        }
     }
 }

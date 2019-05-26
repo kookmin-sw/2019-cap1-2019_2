@@ -35,6 +35,7 @@ def synthesis(request):
         targetTextureHeadPose = request.FILES['targetTextureHeadPose']
         targetTextureVertices = request.FILES['targetTextureVertices']
 
+        sourceMeshHeadPose    = request.FILES['sourceMeshHeadPose']
         sourceMeshVertices    = request.FILES['sourceMeshVertices']
         sourceTextureVertices = request.FILES['sourceTextureVertices']
 
@@ -45,6 +46,8 @@ def synthesis(request):
         remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name))
         default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name), ContentFile(targetTextureVertices.read()))
         
+        remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshHeadPose.name))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshHeadPose.name), ContentFile(sourceMeshHeadPose.read()))
         remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshVertices.name))
         default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshVertices.name), ContentFile(sourceMeshVertices.read()))
         remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, sourceTextureVertices.name))
