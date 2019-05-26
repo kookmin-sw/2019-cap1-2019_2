@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RecordText
   - Record
+  - TargetImage
+  - SourceImage
   layers:
   - Default
   - TransparentFX

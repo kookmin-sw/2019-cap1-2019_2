@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneLoadController : MonoBehaviour
 {
@@ -14,18 +12,16 @@ public class SceneLoadController : MonoBehaviour
     }
     public void MoveToGallery()
     {
-        SceneManager.LoadScene("Gallery");
+        SceneManager.LoadScene("gallery");
     }
     public void MoveToSynthesis()
     {
-        SceneManager.LoadScene("Synthesis");
+        Global.selectMode = 0;
+        SceneManager.LoadScene("synthesis");
     }
     public void MoveToCamera()
     {
+        Global.selectMode = 0;
         SceneManager.LoadScene("camera");
-    }
-    public void MoveToLoading()
-    {
-        SceneManager.LoadScene("loading");
     }
 }

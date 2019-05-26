@@ -38,9 +38,30 @@ public class GalleryController : MonoBehaviour
             Vector3 newScale = imageObject.transform.localScale;
             newScale *= 1.5f;
             imageObject.transform.localScale = newScale;
+            if(imageName == Global.targetImageName)
+            {
+                imageObject.gameObject.tag = "TargetImage";
+            }
+            else if(imageName == Global.sourceImageName)
+            {
+                imageObject.gameObject.tag = "SourceImage";
+            }
             imageObject.GetComponent<ImageLoader>().SetImageName(imageName);
             imageObject.GetComponent<ImageLoader>().AttachImage();
-            imageObject.GetComponent<ImageLoader>().SetWhite();
+        }
+
+        switch (Global.selectMode)
+        {
+            case 1:
+                GameObject.FindWithTag("TargetImage").GetComponent<ImageLoader>().SetMark(true);
+                break;
+
+            case 2:
+                GameObject.FindWithTag("SourceImage").GetComponent<ImageLoader>().SetMark(true);
+                break;
+
+            default:
+                break;
         }
     }
 }
