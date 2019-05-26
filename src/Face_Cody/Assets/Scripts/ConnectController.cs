@@ -29,10 +29,11 @@ public class ConnectController : MonoBehaviour
         File.WriteAllBytes(string.Format("{0}/emotion/{1}_happiness.txt", Global.logPath, name), webRequest.downloadHandler.data);
     }
 
-    public void SaveSynthesizedImage()
+    public void LoadSynthesizedImage()
     {
         StartCoroutine(RequestToSynthesis());
     }
+
     IEnumerator RequestToSynthesis()
     {
         string meshPath = Global.logPath + "/mesh";
@@ -42,6 +43,7 @@ public class ConnectController : MonoBehaviour
         byte[] targetTextureHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", texturePath, Global.targetImageName));
         byte[] targetTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.targetImageName));
 
+        byte[] sourceMeshHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", meshPath, Global.sourceImageName));
         byte[] sourceMeshVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", meshPath, Global.sourceImageName));
         byte[] sourceTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.sourceImageName));
 
@@ -51,15 +53,15 @@ public class ConnectController : MonoBehaviour
         form.AddBinaryData("targetTextureHeadPose", targetTextureHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("targetTextureVertices", targetTextureVertices, Global.targetImageName + "_vertices.txt", "text/txt");
 
+        form.AddBinaryData("sourceMeshHeadPose", sourceMeshHeadPose, Global.sourceImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("sourceMeshVertices", sourceMeshVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
         form.AddBinaryData("sourceTextureVertices", sourceTextureVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
 
         UnityWebRequest webRequest = UnityWebRequest.Post(string.Format("http://{0}:8000/server/synthesis", Global.ipAddress), form);
         yield return webRequest.SendWebRequest();
 
-
-        //GameObject.Find("SynthesisController").GetComponent<SynthesisController>().SaveImages(webRequest.downloadHandler.data);
-        // image save
-        //File.WriteAllBytes(string.Format("{0}/{1}+{2}.png", Global.imagePath, Global.targetImageName, Global.sourceImageName), webRequest.downloadHandler.data);
+        GameObject.Find("SynthesisController").GetComponent<SynthesisController>().SetSyntheSizedImage(webRequest.downloadHandler.data);
+        GameObject.Find("PanelsController").GetComponent<PanelsController>().ChangeActivePanel(2);
+        yield break;
     }
 }

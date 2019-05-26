@@ -66,7 +66,7 @@ public class Modeler : MonoBehaviour
 
     void RotationMesh(Vector3 angles)
     {
-        angles += transform.rotation.eulerAngles;
+        angles -= transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(angles);
     }
 
@@ -94,7 +94,7 @@ public class Modeler : MonoBehaviour
 
     void SaveRotatedVertices(string fileName)
     {
-        transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        //transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         FileStream fs = new FileStream(string.Format("{0}/{1}_vertices.txt", Global.texturePath, fileName), FileMode.Create, FileAccess.Write);
         StreamWriter sw = new StreamWriter(fs);
 
@@ -112,11 +112,9 @@ public class Modeler : MonoBehaviour
     {
         LoadMeshData(Global.sourceName);
         AttachTexture(Global.sourceName);
-
-        RotationMesh(LoadHeadPose(Global.targetName));
-        GameObject.Find("ScreenCapturer").GetComponent<ScreenCaptureController>().ScreenCapture(Global.sourceName);
+        RotationMesh(LoadHeadPose(Global.targetName) - LoadHeadPose(Global.sourceName));
         SaveUpdatedHeadPose(Global.sourceName);
         SaveRotatedVertices(Global.sourceName);
-        Application.Quit();
+        GameObject.Find("ScreenCapturer").GetComponent<ScreenCaptureController>().ScreenCapture(Global.sourceName);
     }
 }
