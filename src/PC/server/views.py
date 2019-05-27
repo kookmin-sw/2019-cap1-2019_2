@@ -31,21 +31,30 @@ def happiness(request):
 @csrf_exempt
 def synthesis(request):
     if request.method == 'POST':
+        targetImage           = request.FILES['targetImage']
         targetMeshHeadPose    = request.FILES['targetMeshHeadPose']
         targetTextureHeadPose = request.FILES['targetTextureHeadPose']
         targetTextureVertices = request.FILES['targetTextureVertices']
+        targetLight = request.FILES['targetLight']
 
+        sourceImage           = request.FILES['sourceImage']
         sourceMeshHeadPose    = request.FILES['sourceMeshHeadPose']
         sourceMeshVertices    = request.FILES['sourceMeshVertices']
         sourceTextureVertices = request.FILES['sourceTextureVertices']
 
+        remove_duplicate_files('{}/data/image/{}'.format(WORKING_PATH, targetImage.name))
+        default_storage.save('{}/data/image/{}'.format(WORKING_PATH, targetImage.name), ContentFile(targetImage.read()))
         remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, targetMeshHeadPose.name))
         default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, targetMeshHeadPose.name), ContentFile(targetMeshHeadPose.read()))
         remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, targetTextureHeadPose.name))
         default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, targetTextureHeadPose.name), ContentFile(targetTextureHeadPose.read()))
         remove_duplicate_files('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name))
         default_storage.save('{}/data/texture/{}'.format(WORKING_PATH, targetTextureVertices.name), ContentFile(targetTextureVertices.read()))
-        
+        remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, targetLight.name))
+        default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, targetLight.name), ContentFile(targetLight.read()))
+
+        remove_duplicate_files('{}/data/image/{}'.format(WORKING_PATH, sourceImage.name))
+        default_storage.save('{}/data/image/{}'.format(WORKING_PATH, sourceImage.name), ContentFile(sourceImage.read()))
         remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshHeadPose.name))
         default_storage.save('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshHeadPose.name), ContentFile(sourceMeshHeadPose.read()))
         remove_duplicate_files('{}/data/mesh/{}'.format(WORKING_PATH, sourceMeshVertices.name))
@@ -59,6 +68,10 @@ def synthesis(request):
         sourceName = sourceName[:-9]
         targetName = os.path.splitext(targetTextureVertices.name)[0]
         targetName = targetName[:-9]
+
+        print('Light Removing...')
+        os.system("python -B {}/utils/light_remover.py {}".format(WORKING_PATH, sourceName))
+        print('Light Removing is done.')
 
         print('Unwrapping...')
         os.system("python -B {}/utils/unwrapper.py {}".format(WORKING_PATH, sourceName)) # 텍스처 이미지생성

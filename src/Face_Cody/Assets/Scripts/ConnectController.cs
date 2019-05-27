@@ -39,20 +39,26 @@ public class ConnectController : MonoBehaviour
         string meshPath = Global.logPath + "/mesh";
         string texturePath = Global.logPath + "/texture";
 
+        byte[] targetImage = File.ReadAllBytes(string.Format("{0}/{1}.png", Global.imagePath, Global.targetImageName));
         byte[] targetMeshHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", meshPath, Global.targetImageName));
         byte[] targetTextureHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", texturePath, Global.targetImageName));
         byte[] targetTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.targetImageName));
+        byte[] targetLight = File.ReadAllBytes(string.Format("{0}/{1}_light.txt", meshPath, Global.targetImageName));
 
+        byte[] sourceImage = File.ReadAllBytes(string.Format("{0}/{1}.png", Global.imagePath, Global.sourceImageName));
         byte[] sourceMeshHeadPose = File.ReadAllBytes(string.Format("{0}/{1}_headPose.txt", meshPath, Global.sourceImageName));
         byte[] sourceMeshVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", meshPath, Global.sourceImageName));
         byte[] sourceTextureVertices = File.ReadAllBytes(string.Format("{0}/{1}_vertices.txt", texturePath, Global.sourceImageName));
 
         WWWForm form = new WWWForm();
 
+        form.AddBinaryData("targetImage", targetImage, Global.targetImageName + ".png", "image/png");
         form.AddBinaryData("targetMeshHeadPose", targetMeshHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("targetTextureHeadPose", targetTextureHeadPose, Global.targetImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("targetTextureVertices", targetTextureVertices, Global.targetImageName + "_vertices.txt", "text/txt");
+        form.AddBinaryData("targetLight", targetLight, Global.targetImageName + "_light.txt", "text/txt");
 
+        form.AddBinaryData("sourceImage", sourceImage, Global.sourceImageName + ".png", "image/png");
         form.AddBinaryData("sourceMeshHeadPose", sourceMeshHeadPose, Global.sourceImageName + "_headPose.txt", "text/txt");
         form.AddBinaryData("sourceMeshVertices", sourceMeshVertices, Global.sourceImageName + "_vertices.txt", "text/txt");
         form.AddBinaryData("sourceTextureVertices", sourceTextureVertices, Global.sourceImageName + "_vertices.txt", "text/txt");

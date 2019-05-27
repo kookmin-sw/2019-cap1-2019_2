@@ -5,13 +5,22 @@ public class Modeler : MonoBehaviour
 {
     Mesh mesh;
     Camera camera;
-
+    Light light;
     void Awake()
     {
         mesh = GetComponent<MeshFilter>().mesh;
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        light = GameObject.Find("PointLight").GetComponent<Light>();
     }
 
+    void LoadLightData(string fileName)
+    {
+        float lightFactor = 10.0f;
+
+        string[] lines = File.ReadAllLines(string.Format("{0}/{1}_light.txt", Global.meshPath, fileName));
+        float intensity = float.Parse(lines[0]);
+        light.range = intensity * lightFactor;
+    }
     void LoadMeshData(string fileName)
     {
         string[] lines = File.ReadAllLines(string.Format("{0}/{1}_vertices.txt", Global.meshPath, fileName));
@@ -110,6 +119,7 @@ public class Modeler : MonoBehaviour
 
     public void DrawMesh()
     {
+        LoadLightData(Global.targetName);
         LoadMeshData(Global.sourceName);
         AttachTexture(Global.sourceName);
         RotationMesh(LoadHeadPose(Global.targetName) - LoadHeadPose(Global.sourceName));
