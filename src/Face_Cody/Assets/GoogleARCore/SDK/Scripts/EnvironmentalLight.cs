@@ -20,6 +20,7 @@
 
 namespace GoogleARCore
 {
+    using System.IO;
     using GoogleARCoreInternal;
     using UnityEngine;
     using UnityEngine.Rendering;
@@ -65,6 +66,17 @@ namespace GoogleARCore
 
             // Set _GlobalLightEstimation for backward compatibility.
             Shader.SetGlobalFloat("_GlobalLightEstimation", normalizedIntensity);
+        }
+        public void SaveLightInfo(string name)
+        {
+            FileStream fs = new FileStream(string.Format("{0}/mesh/{1}_light.txt", Global.logPath, name), FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            float middleGray = 0.466f;
+            sw.WriteLine(Frame.LightEstimate.PixelIntensity / middleGray);
+
+            sw.Close();
+            fs.Close();
         }
     }
 }
