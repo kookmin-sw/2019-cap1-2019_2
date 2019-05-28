@@ -25,7 +25,7 @@ Also, ARCore which is an augmented reality platform is applied to synthesis and 
 
 [![thumbnail](./doc/img/thumbnail.jpg)](https://youtu.be/NZtXfdSoL8w)
 
-## 5. 시나리오
+## 5. 사용법
 
 <img align="center" width="100%" height="100%" src="./doc/img/howToUse.png"> 
 
@@ -90,9 +90,6 @@ Also, ARCore which is an augmented reality platform is applied to synthesis and 
 * e-mail : 189745297@qq.com
 ````
 
-## 6. 사용법
-
-추후 추가예정
 
 
 
