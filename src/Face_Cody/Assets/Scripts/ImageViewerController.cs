@@ -7,13 +7,14 @@ public class ImageViewerController : MonoBehaviour
     private GameObject sourceImageViewer;
     private GameObject targetImageViewer;
     private GameObject synthesizedImageViewer;
-
+    private GameObject recommendController;
     // Start is called before the first frame update
     void Start()
     {
         sourceImageViewer = GameObject.Find("SourceImageViewer");
         targetImageViewer = GameObject.Find("TargetImageViewer");
         synthesizedImageViewer = GameObject.Find("SynthesizedImageViewer");
+        recommendController = GameObject.Find("RecommendController");
     }
 
     public void UpdateImageViewer(int panel)
@@ -31,7 +32,15 @@ public class ImageViewerController : MonoBehaviour
                     sourceImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "이미지 불러오기";
                 }
 
-                if (Global.targetImageName != "")
+                if (Global.targetImageName != "" && Global.sourceImageName == "")
+                {
+                    AttachImage(targetImageViewer, Global.targetImageName);
+                    targetImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
+                    recommendController.GetComponent<RecommendController>().SetSourceImage();
+                    AttachImage(sourceImageViewer, Global.sourceImageName);
+                    sourceImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
+                }
+                else if(Global.targetImageName != "")
                 {
                     AttachImage(targetImageViewer, Global.targetImageName);
                     targetImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
