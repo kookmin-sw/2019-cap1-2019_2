@@ -29,7 +29,10 @@ Also, ARCore which is an augmented reality platform is applied to synthesis and 
 
 <img align="center" width="100%" height="100%" src="./doc/img/howToUse.png"> 
 
-## 6. 팀 소개
+## 6. 시연 영상
+[![thumbnail](./doc/img/thumbnail_2.jpg)](https://youtu.be/_RtscBERDSk)
+
+## 7. 팀 소개
 
 ### Professor
 
