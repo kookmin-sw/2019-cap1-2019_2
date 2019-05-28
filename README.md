@@ -17,15 +17,19 @@ It automates the process of selecting two photos to be modified, thereby providi
 The user can obtain the final composite picture as a simple scenario in which only the picture to be synthesized is selected.
 Also, ARCore which is an augmented reality platform is applied to synthesis and a new synthesis technique is proposed.
 
-## 3. 시나리오
+## 3. 시스템 구성도
 
-<img align="center" width="100%" height="100%" src="./doc/img/scenario.jpg"> 
+<img align="center" width="100%" height="100%" src="./doc/img/system_architecture.png"> 
 
 ## 4. 소개 영상
 
 [![thumbnail](./doc/img/thumbnail.jpg)](https://youtu.be/NZtXfdSoL8w)
 
-## 5. 팀 소개
+## 5. 시나리오
+
+<img align="center" width="100%" height="100%" src="./doc/img/howToUse.png"> 
+
+## 6. 팀 소개
 
 ### Professor
 
