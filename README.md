@@ -1,29 +1,23 @@
 ﻿# 얼굴 코디
-ARCore를 활용한 자동 합성 시스템
-<br/><br/>
-<img src="./doc/img/logo.jpg" alt="logo" width="300" height="177">
-<br/>
-## 1. 프로젝트 소개
+합성 적합도를 활용한 자동 합성 시스템
 
-본 프로젝트는 사람의 얼굴 방향, 표정을 기반으로 얼굴을 합성하여 모두가 잘 나온 단체 사진을 얻는 것을 목표로 한다.
-수정할 사진 2장을 선택하는 과정을 자동화하여 사용자의 서비스 이용에 편리함을 제공한다. 
-사용자는 3초간의 동영상을 찍는 비교적 간단한 시나리오로 최종 합성 사진을 얻을 수 있다.
+
+
+## 1. 프로잭트 소개
+
+본 프로젝트는 이미지 합성을 통해 원하는 표정으로 보정할 수 있는 프로그램 개발을 목표로 한다.
+완성된 프로그램을 이용할 경우 누구나 수정하고 싶은 사진을 선택하고 합성적합도에 기반한 자동 합성 시스템을 통하여 원하는 표정으로 보정된 사진을 얻을 수 있을 것이다.
 
 ## 2. Abstract
 
-This project aims to obtain a group photo that everyone looks good by synthesizing faces based on face direction and face expression of a person.
-It automates the process of selecting two photos to be modified, thereby providing convenience for users to use the service.
-Users can obtain final edited photos in a relatively simple scenario of taking a three-second video.
+This project aims to develop a program that can correct the desired expression through image synthesis.
+By using our completed program, you can select the pircure you want to modify and get the edited picture with the desired expression through our automatic synthesis system based on synthetic fitness.
 
-## 3. 시나리오
-
-<img align="center" width="100%" height="100%" src="./doc/img/scenario.jpg"> 
-
-## 4. 소개 영상
+## 3. 소개 영상
 
 [![thumbnail](./doc/img/thumbnail.jpg)](https://youtu.be/NZtXfdSoL8w)
 
-## 5. 팀 소개
+## 4. 팀 소개
 
 ### Professor
 
@@ -84,7 +78,7 @@ Users can obtain final edited photos in a relatively simple scenario of taking a
 * e-mail : 189745297@qq.com
 ````
 
-## 6. 사용법
+## 5. 사용법
 
 추후 추가예정
 
