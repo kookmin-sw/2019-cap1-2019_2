@@ -32,13 +32,18 @@ public class ImageViewerController : MonoBehaviour
                     sourceImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "이미지 불러오기";
                 }
 
-                if (Global.targetImageName != "")
+                if (Global.targetImageName != "" && Global.sourceImageName == "")
                 {
                     AttachImage(targetImageViewer, Global.targetImageName);
                     targetImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
                     recommendController.GetComponent<RecommendController>().SetSourceImage();
                     AttachImage(sourceImageViewer, Global.sourceImageName);
                     sourceImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
+                }
+                else if(Global.targetImageName != "")
+                {
+                    AttachImage(targetImageViewer, Global.targetImageName);
+                    targetImageViewer.transform.Find("Text").gameObject.GetComponent<Text>().text = "";
                 }
                 else
                 {
