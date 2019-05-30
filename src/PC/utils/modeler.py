@@ -46,9 +46,11 @@ def post_processing(targetName, sourceName):
     ratioHeight = get_distance(targetVertices[FOREHEAD_TIP], targetVertices[CHIN_TIP]) / \
                   get_distance(sourceVertices[FOREHEAD_TIP], sourceVertices[CHIN_TIP])
 
+    targetImage = cv2.imread("{}/data/image/{}.png".format(WORKING_PATH, targetName))
     sourceImage = cv2.imread("{}/data/texture/{}.png".format(WORKING_PATH, sourceName))
+    # sourceImage = get_resized_image(sourceImage, RESIZE_RATIO, RESIZE_RATIO)
     sourceImage = get_resized_image(sourceImage, ratioWidth, ratioHeight)
-    sourceImage = get_standardized_image(sourceImage, shape=(IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNEL))
+    sourceImage = get_standardized_image(sourceImage, shape=targetImage.shape)
     
     targetCenter = np.genfromtxt("{}/data/texture/{}_headPose.txt".format(WORKING_PATH, targetName), dtype=np.float)
     sourceCenter = np.genfromtxt("{}/data/texture/{}_headPose.txt".format(WORKING_PATH, sourceName), dtype=np.float)
@@ -71,5 +73,6 @@ if __name__ == '__main__':
     targetName = sys.argv[1]
     sourceName = sys.argv[2]
 
-    os.system("cd {}\\utils\\modeling\\Build & Modeling.exe {} {}".format(WORKING_PATH, targetName, sourceName))
+    sourceImage = cv2.imread("{}/data/mesh/{}_reduced.png".format(WORKING_PATH, sourceName))
+    os.system("cd {}\\utils\\modeling\\Build & Modeling.exe {} {} {} {}".format(WORKING_PATH, targetName, sourceName, sourceImage.shape[1], sourceImage.shape[0]))
     post_processing(targetName, sourceName)

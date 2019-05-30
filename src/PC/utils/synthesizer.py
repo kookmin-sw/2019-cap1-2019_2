@@ -13,9 +13,12 @@ def get_mask(shape, points, color=(255, 255, 255)):
     mask = np.zeros(shape, dtype=np.uint8)
     cv2.fillConvexPoly(mask, polygon, color)
     kernel = np.ones((5, 5), dtype=np.uint8)
-    return cv2.erode(mask, kernel, iterations = 2)
+    return cv2.erode(mask, kernel, iterations = 3)
 
 def get_center_height_of_mask(maskImage):
+    maxH = 0
+    minH = maskImage.shape[0]
+
     for i in range(maskImage.shape[0]):
         if maskImage[i,:,:].sum() != 0:
             minH = i

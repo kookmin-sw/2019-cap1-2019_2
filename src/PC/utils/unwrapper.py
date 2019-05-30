@@ -6,12 +6,13 @@ from config import *
 class Texture:
     def __init__(self, fileName=""):
         if fileName != "":
-            self.image = cv2.imread("{}/data/image/{}.png".format(WORKING_PATH, fileName))
+            self.image = cv2.imread("{}/data/mesh/{}_reduced.png".format(WORKING_PATH, fileName))
             self.vertices = self.load_data("{}/data/texture/{}_vertices.txt".format(WORKING_PATH, fileName))
         else:
-            self.image = np.zeros(shape=(IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNEL), dtype=np.uint8)
+            self.image = np.zeros(shape=(1, 1, 3), dtype=np.uint8)
             self.vertices = self.load_data("{}/data/texture/uvs.txt".format(WORKING_PATH))
 
+        self.vertices = self.vertices // RESIZE_RATIO
         self.triangles = self.get_triangles()
         self.rectangles = self.get_rectangles()
 
@@ -58,11 +59,13 @@ def get_area_of_non_zero_region(image):
     _, gray = cv2.threshold(gray, 1, 1, cv2.THRESH_BINARY)
     return gray.sum()
 
-def get_area_of_outer_region(image, points):
+def get_ratio_of_outer_area_to_inner_area(image, points):
     mask = get_mask(image.shape[:2], points)
     maskInv = cv2.bitwise_not(mask)
+    innerImage = cv2.bitwise_and(image, image, mask=mask)
     outerImage = cv2.bitwise_and(image, image, mask=maskInv)
-    return get_area_of_non_zero_region(outerImage)
+    np.seterr(all='raise')
+    return get_area_of_non_zero_region(outerImage) / get_area_of_non_zero_region(innerImage)
 
 def remove_of_outer_region(image, points):
     mask = get_mask(image.shape[:2], points)
@@ -89,9 +92,14 @@ def get_thicker_mask_image(maskImage, thickness=2):
         thickerImage[:, :-i] += maskImage[:, i: ]
     return thickerImage
 
+def get_resized_image(image, ratio):
+    return cv2.resize(image, dsize=(0, 0), fx=ratio, fy=ratio, interpolation=cv2.INTER_LINEAR)
+
 def unwrapping(fileName):
     source = Texture(fileName)
     target = Texture()
+    target.image = np.zeros(shape=source.image.shape, dtype=np.uint8)
+
     inpaintMask = cv2.add(get_mask(target.image.shape[:2], target.rectangles[262]),
                           get_mask(target.image.shape[:2], target.rectangles[263]))
     
@@ -107,7 +115,12 @@ def unwrapping(fileName):
         sourceRectangleImage = get_region_of_interest_image(source.image, sourceRectangle)
         affineImage = get_rectangular_affine_image(sourceRectangleImage, sourceRectangle, targetRectangle)
 
-        if get_area_of_outer_region(affineImage, targetRectangle) > 10000:
+        try:
+            if get_ratio_of_outer_area_to_inner_area(affineImage, targetRectangle) > 4.0:
+                inpaintMask_ = get_mask(target.image.shape[:2], targetRectangle)
+                inpaintMask = cv2.add(inpaintMask, inpaintMask_)
+                continue
+        except:
             inpaintMask_ = get_mask(target.image.shape[:2], targetRectangle)
             inpaintMask = cv2.add(inpaintMask, inpaintMask_)
             continue
@@ -115,9 +128,10 @@ def unwrapping(fileName):
         targetRectangleImage = remove_of_outer_region(affineImage, targetRectangle)
         target.image, inpaintMask_ = add_two_images(target.image, targetRectangleImage)
         inpaintMask = cv2.add(inpaintMask, inpaintMask_)
-    
-    inpaintMask = get_thicker_mask_image(inpaintMask, 3)
+
+    inpaintMask = get_thicker_mask_image(inpaintMask)
     target.image = cv2.inpaint(target.image, inpaintMask, 2, cv2.INPAINT_TELEA)
+    target.image = get_resized_image(target.image, RESIZE_RATIO)
     cv2.imwrite("{}/data/mesh/{}_unwrapped.png".format(WORKING_PATH, fileName), target.image)
 
 if __name__ == '__main__':

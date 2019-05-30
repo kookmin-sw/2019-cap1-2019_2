@@ -63,14 +63,14 @@ public class Modeler : MonoBehaviour
         renderer.materials[0].mainTexture = texture;
     }
 
-    Vector3 LoadHeadPose(string fileName)
+    void LoadHeadPose(string fileName, out Vector3 centerPose, out Vector3 headPose)
     {
         string[] lines = File.ReadAllLines(string.Format("{0}/{1}_headPose.txt", Global.meshPath, fileName));
         string[] line = lines[0].Split(' ');
-        transform.position = new Vector3(float.Parse(line[0]), float.Parse(line[1]), float.Parse(line[2]));
+        centerPose = new Vector3(float.Parse(line[0]), float.Parse(line[1]), float.Parse(line[2]));
 
         line = lines[1].Split(' ');
-        return new Vector3(-float.Parse(line[0]), -float.Parse(line[1]), -float.Parse(line[2]));
+        headPose = new Vector3(-float.Parse(line[0]), -float.Parse(line[1]), -float.Parse(line[2]));
     }
 
     void RotationMesh(Vector3 angles)
@@ -122,7 +122,15 @@ public class Modeler : MonoBehaviour
         LoadLightData(Global.targetName);
         LoadMeshData(Global.sourceName);
         AttachTexture(Global.sourceName);
-        RotationMesh(LoadHeadPose(Global.targetName) - LoadHeadPose(Global.sourceName));
+
+        Vector3 targetCenterPose, targetHeadPose;
+        Vector3 sourceCenterPose, sourceHeadPose;
+
+        LoadHeadPose(Global.targetName, out targetCenterPose, out targetHeadPose);
+        LoadHeadPose(Global.sourceName, out sourceCenterPose, out sourceHeadPose);
+
+        transform.position = sourceCenterPose;
+        RotationMesh(targetHeadPose);
         SaveUpdatedHeadPose(Global.sourceName);
         SaveRotatedVertices(Global.sourceName);
         GameObject.Find("ScreenCapturer").GetComponent<ScreenCaptureController>().ScreenCapture(Global.sourceName);

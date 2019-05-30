@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
         args = Environment.GetCommandLineArgs();
         Global.targetName = args[1];
         Global.sourceName = args[2];
-        Screen.SetResolution(Global.imageWidth, Global.imageHeight, false);
+        Screen.SetResolution(int.Parse(string.Format("{0}", args[3])), int.Parse(string.Format("{0}", args[4])), false);
 
         GameObject.Find("Mesh").GetComponent<Modeler>().DrawMesh();
     }

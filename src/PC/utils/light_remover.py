@@ -3,12 +3,10 @@ import numpy as np
 import sys
 from config import *
 
-RESIZE_RATIO = 2.5
-
 def get_resized_image(image, ratio):
     return cv2.resize(image, dsize=(0, 0), fx=ratio, fy=ratio, interpolation=cv2.INTER_LINEAR)
 
-def get_light_removed_image(image, sigma=10, gamma_1=0.9, gamma_2=1.5):
+def get_light_removed_image(image, sigma=18, gamma_1=0.9, gamma_2=1.5):
     imageYUV = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
     imageY, imageU, imageV = cv2.split(imageYUV)
     
@@ -44,12 +42,33 @@ def get_light_removed_image(image, sigma=10, gamma_1=0.9, gamma_2=1.5):
     imageYUV = cv2.merge([imageY, imageU, imageV])
     image = cv2.cvtColor(imageYUV, cv2.COLOR_YUV2BGR)
     return image
-    
 
-if __name__ == '__main__':
-    fileName = sys.argv[1]
+def brightness_reducer(fileName, threshold=120):
     image = cv2.imread("{}/data/image/{}.png".format(WORKING_PATH, fileName))
     image = get_resized_image(image, ratio=1/RESIZE_RATIO)
-    image = get_light_removed_image(image)
-    image = get_resized_image(image, ratio=RESIZE_RATIO)
-    cv2.imwrite("{}/data/image/{}.png".format(WORKING_PATH, fileName), image)
+
+    lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+
+    diff = np.zeros(shape=l.shape, dtype=np.uint8)
+    for i in range(l.shape[0]):
+        for j in range(l.shape[1]):
+            if l[i, j] > threshold:
+                diff[i, j] = (l[i, j] - threshold) // 2
+            else:
+                diff[i, j] = (l[i, j] - threshold) // 8
+    l -= diff
+
+    lab = cv2.merge((l, a, b))
+    image = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
+    cv2.imwrite('{}/data/mesh/{}_reduced.png'.format(WORKING_PATH, fileName), image)
+
+
+if __name__ == '__main__':
+    # fileName = sys.argv[1] # params: fileName
+    # image = cv2.imread("{}/data/image/{}.png".format(WORKING_PATH, fileName))
+    # image = get_resized_image(image, ratio=1/RESIZE_RATIO)
+    # image = get_light_removed_image(image)
+    # cv2.imwrite("{}/data/mesh/{}_reduced.png".format(WORKING_PATH, fileName), image)
+    
+    brightness_reducer(sys.argv[1])

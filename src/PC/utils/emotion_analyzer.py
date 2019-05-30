@@ -42,8 +42,5 @@ def emotion_analysis(fileName, emotion='happiness'):
         f.write('0.0')
         f.close()
 
-    
-
-
 if __name__ == '__main__':
     emotion_analysis(sys.argv[1]) # params: fileName
