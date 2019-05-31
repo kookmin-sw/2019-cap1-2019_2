@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GalleryController : MonoBehaviour
 {
@@ -12,6 +13,15 @@ public class GalleryController : MonoBehaviour
     {
         UpdateImageList();
         CreateImageObject();
+
+        if (Global.selectMode == 0)
+        {
+            GameObject.Find("Text").GetComponent<Text>().text = "확인";
+        }
+        else
+        {
+            GameObject.Find("Text").GetComponent<Text>().text = "선택";
+        }
     }
 
     private void UpdateImageList()
@@ -62,6 +72,15 @@ public class GalleryController : MonoBehaviour
 
             default:
                 break;
+        }
+    }
+
+    public void DeleteAllImages()
+    {
+        DirectoryInfo dictInfo = new DirectoryInfo(Global.imagePath);
+        foreach (FileInfo file in dictInfo.GetFiles())
+        {
+            File.Delete(file.FullName);
         }
     }
 }
