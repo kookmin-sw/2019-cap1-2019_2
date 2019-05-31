@@ -11,7 +11,7 @@ public class RecommendController : MonoBehaviour
     private List<string> Names = new List<string>();
     private string emotionPath;
     string meshPath;
-    float maxEmotion = 0.5f;
+    float maxEmotion = 0.3f;
     private GameObject sourceImageViewer;
 
     private void Start()
