@@ -46,6 +46,9 @@ def post_processing(targetName, sourceName):
     ratioHeight = get_distance(targetVertices[FOREHEAD_TIP], targetVertices[CHIN_TIP]) / \
                   get_distance(sourceVertices[FOREHEAD_TIP], sourceVertices[CHIN_TIP])
 
+    # ratioWidth *= 1.05
+    # ratioHeight *= 1.05
+
     targetImage = cv2.imread("{}/data/image/{}.png".format(WORKING_PATH, targetName))
     sourceImage = cv2.imread("{}/data/texture/{}.png".format(WORKING_PATH, sourceName))
     # sourceImage = get_resized_image(sourceImage, RESIZE_RATIO, RESIZE_RATIO)
@@ -60,7 +63,8 @@ def post_processing(targetName, sourceName):
     sourceVertices[:, 1] *= ratioHeight
 
     distanceToMove = targetCenter - sourceCenter
-    distanceToMove[1] = targetVertices[FOREHEAD_TIP, 1] - sourceVertices[FOREHEAD_TIP, 1]
+    # distanceToMove[1] = targetVertices[FOREHEAD_TIP, 1] - sourceVertices[FOREHEAD_TIP, 1]
+    distanceToMove[1] = targetVertices[CHIN_TIP, 1] - sourceVertices[CHIN_TIP, 1]
     
     sourceImage = get_moved_image(sourceImage, dw=distanceToMove[0], dh=distanceToMove[1])
     cv2.imwrite("{}/data/texture/{}.png".format(WORKING_PATH, sourceName), sourceImage)
@@ -75,4 +79,5 @@ if __name__ == '__main__':
 
     sourceImage = cv2.imread("{}/data/mesh/{}_reduced.png".format(WORKING_PATH, sourceName))
     os.system("cd {}\\utils\\modeling\\Build & Modeling.exe {} {} {} {}".format(WORKING_PATH, targetName, sourceName, sourceImage.shape[1], sourceImage.shape[0]))
+
     post_processing(targetName, sourceName)
